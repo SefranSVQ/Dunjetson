@@ -68,7 +68,7 @@ public class GestoraPrincipal {
 
 		sc.nextLine();
 		
-		UtilJuego.limpiarPantalla(50);
+		UtilJuego.limpiarPantalla(15);
 		
 		do {
 			
@@ -80,12 +80,12 @@ public class GestoraPrincipal {
 				}
 				
 				pintarMenuPrincipal();
-				UtilJuego.limpiarPantalla(15);
+				UtilJuego.limpiarPantalla(10);
 				
 				try {
-					opcionMenuPrincipal = sc.nextInt();
+					opcionMenuPrincipal = Integer.parseInt(sc.nextLine());
 				}
-				catch (Exception e) { sc.next(); opcionMenuPrincipal = -1; }
+				catch (Exception e) { opcionMenuPrincipal = -1; }
 				
 			}
 			while (opcionMenuPrincipal < 0 || opcionMenuPrincipal > 4);
@@ -105,22 +105,20 @@ public class GestoraPrincipal {
 						
 						UtilJuego.limpiarPantalla(50);
 						
-						System.out.println("Algo está sucediendo en la tierra, algo tenebroso está\n"
-								+ "poniendo en peligro a todos los seres de este planeta. \n"
-								+ "Una gran montaña ha surgido de la nada en medio de \" El río Grande \".\n"
+						System.out.println("Una gran montaña ha surgido de la nada en medio de \" El río Grande \".\n"
 								+ "Muchos aventureros han decidido buscar fortuna en ella, pero tú sientes\n"
 								+ "que allí hay algo más que tesoros. \n\n"
 								+ "Pulsa intro para continuar.");
 						
 						sc.nextLine();
 						
+						System.out.println("\nPero antes de seguir con todo este rollo, dime, \n");
 
 						do {
 							
 							do {
 								
-								System.out.println("\nPero antes de seguir con todo este rollo, dime, \n"
-										+ "¿Cómo te llamas? (Máximo 10 caracteres)");
+								System.out.println("¿Cómo te llamas? (Máximo 10 caracteres)");
 								nombre = sc.nextLine();
 							
 							}
@@ -160,9 +158,9 @@ public class GestoraPrincipal {
 							System.out.println("4 - ");
 							
 							try {
-								espacioGuardado = sc.nextInt();
+								espacioGuardado = Integer.parseInt(sc.nextLine());
 							}
-							catch (Exception e) {sc.next(); espacioGuardado = 5;}
+							catch (Exception e) {espacioGuardado = -1;}
 							
 						}
 						while (espacioGuardado < 0 || espacioGuardado > 4);
@@ -238,10 +236,6 @@ public class GestoraPrincipal {
 						}
 						
 						
-						
-						/*
-						System.out.println("Opcion en construccion");
-						espacioCargado = 1; */
 					break;
 					
 					case 2:
@@ -288,7 +282,7 @@ public class GestoraPrincipal {
 	
 	public void pintarMenuPrincipal() {
 		
-		UtilJuego.limpiarPantalla(20);
+		UtilJuego.limpiarPantalla(10);
 		
 		System.out.println("       _    .  ,   .           .");  
 		System.out.println("   *  / \\_ *  / \\_      _  *        *   /\\'__        *"); 
