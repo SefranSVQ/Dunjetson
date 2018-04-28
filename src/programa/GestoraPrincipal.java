@@ -1,13 +1,7 @@
 package programa;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import javax.sound.sampled.AudioSystem;
@@ -98,7 +92,7 @@ public class GestoraPrincipal {
 				}
 				
 				pintarMenuPrincipal();
-				UtilJuego.limpiarPantalla(10);
+				UtilJuego.limpiarPantalla(5);
 				
 				try {
 					
@@ -189,7 +183,7 @@ public class GestoraPrincipal {
 							do {
 								System.out.println("¿Seguro que quieres guardarlo en la posición "+espacioGuardado+"? "
 										+ "Los cambios no se podrán deshacer. (S/N)");
-								confirmacionGuardado = Character.toUpperCase(sc.next().charAt(0));
+								confirmacionGuardado = Character.toUpperCase(sc.nextLine().charAt(0));
 							}
 							while (confirmacionGuardado != 'S' && confirmacionGuardado != 'N');
 								
@@ -396,13 +390,35 @@ public class GestoraPrincipal {
 			}
 			
 			
-			// Si se ha elegido iniciar partida ->
+			// Si se ha elegido jugar ->
 			if ((opcionMenuPrincipal == 1 && espacioGuardado!= 0 && confirmacionGuardado == 'S')
 				|| (opcionMenuPrincipal == 2 && espacioGuardado!= 0 )){
 				
 				sonido.stop();
 				
 				//iniciarPartida
+				
+				/*
+				 * inicio
+				 *  mostrarMenuJuegoYObtenerYValidarOpcionJuego
+				 *  si (opcionJuego != -1)
+				 *  	segun (opcionJuego)
+				 *  		caso 0: jugarTutorial
+				 *  		caso 1: jugarMazmorra1
+				 *  		caso 2: jugarMazmorra2
+				 *  		caso 3: jugarMazmorra3
+				 *  		caso 4: jugarMazmorra4
+				 *  		caso 5: jugarMazmorra5
+				 *  		caso 6: jugarMazmorra6
+				 *  		caso 7: jugarMazmorra7
+				 *  		caso 8: jugarMazmorra8
+				 *  		caso 9: jugarMazmorra9
+				 *  	fin segun
+				 *  	guardarPartida
+				 *  fin si
+				 * fin
+				 * 
+				 */
 				System.out.println("Inicio de partida en construcción.");
 
 			}

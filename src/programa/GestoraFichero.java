@@ -34,7 +34,7 @@ public class GestoraFichero {
 		for (int i = 0 ; i < 5 ; i++) {
 			if (i == 0) {
 				try {
-					bw.write("Salir sin guardar");
+					bw.write("Salir.");
 					bw.newLine();
 				} catch (IOException e) {}
 				
@@ -109,6 +109,7 @@ public class GestoraFichero {
 	public static void pintarPartidasGuardadas(String[] partidas) {
 		
 		System.out.println("---- Partidas guardadas ----: ");
+		System.out.println("Att: Nick, Clase, Pod, Int, Agi, Oro, MazCompletadas");
 		System.out.println("0 - "+partidas[0]);
 		System.out.println("1 - "+partidas[1]);
 		System.out.println("2 - "+partidas[2]);
