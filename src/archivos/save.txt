@@ -1,0 +1,5 @@
+Salir sin guardar
+Heroe,NINGUNA,1,1,1,0,0
+Heroe,NINGUNA,1,1,1,0,0
+Dani,MAGO,3,5,3,10,0
+Heroe,NINGUNA,1,1,1,0,0

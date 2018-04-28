@@ -283,6 +283,26 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 	}
 
 	
+	/*
+	 * reiniciarJugador
+	 * 
+	 * este método reinicia las estadísticas del jugador
+	 * 
+	 * sin entradas ni salidas
+	 */
+	
+	public void reiniciarJugador() {
+		try {
+			setNick("Heroe");
+			setClase(Clase.NINGUNA);
+			setPoder(1);
+			setInteligencia(1);
+			setAgilidad(1);
+			setOro(0);
+			setMazmorrasCompletadas(0);
+		} catch (ExcepcionJugador e) {}
+	}
+	
 	@Override
 	public Jugador clone(){
 		

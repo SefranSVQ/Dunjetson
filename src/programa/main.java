@@ -75,7 +75,7 @@
  * 		obtenerYValidarClaseJugador
  * 		obtenerYValidarConfirmacionJugador
  * 	mientras (confirmacionJugador = 'N')
- * 	PintarDatosGuardadoYObtenerYValidarEspacioGuardado
+ * 	PintarPartidasGuardadasYObtenerYValidarEspacioGuardado
  * 	confirmacionYValidacionEspacioGuardado
  * 	si (confirmacionEspacioGuardado == 'S')
  * 		crearJugadorEnEspacioSeleccionado
@@ -88,8 +88,8 @@
  * //cargarPartida
  * 
  * inicio
- * 	pintarPartidas
- * 	obtenerYValidarEspacioGuardado
+ * 	pintarPartidasGuardasYObtenerYValidarEspacioGuardado
+ * 	cargarJugador
  * fin
  * 
  * //borrarPartida
