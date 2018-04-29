@@ -4,19 +4,19 @@
  * 	Atributos básicos:
  * 		- Nick: String, consultable y modificable.
  * 		- Clase: Enum, consultable y modificable.
- * 		- Poder: Entero, consultable y modificable.		//Sirve para enfrentarse a los monstruos.
+ * 		- Fuerza: Entero, consultable y modificable.		//Sirve para enfrentarse a los monstruos.
  * 		- Inteligencia: Entero, consultable y modificable.	//Sirve para enfrentarse a los puzzles.
  * 		- Agilidad: Entero, consultable y modificable.	//Sirve para salvarse de las trampas.
  * 		- Oro: Entero, consultable y modificable.	//Sirve para hacer transacciones en los eventos.
  * 		- MazmorrasCompletadas: entero, consultable y modificable. //Sirve para indicar las mazmorras completadas.
  * 
  *  Atributos derivados:
- *  	- Destreza: Entero, consultable //Poder+Inteligencia+Agilidad
+ *  	- Destreza: Entero, consultable //Fuerza+Inteligencia+Agilidad
  *  
  * Restricciones:
  * 		- Longitud de nick <= 10
  *  	- Clase debe ser GUERRERO, MAGO, LADRON, COMERCIANTE o NINGUNA
- *  	- Poder > 0
+ *  	- Fuerza > 0
  *  	- Inteligencia > 0
  *  	- Agilidad > 0
  *  	- Oro >= 0
@@ -34,8 +34,8 @@
  * Clase getClase()
  * void setClase(Clase clase)
  * 
- * int getPoder()
- * void setPoder(int poder)
+ * int getFuerza()
+ * void setFuerza(int fuerza)
  * 
  * int getInteligencia()
  * void setInteligencia(int inteligencia)
@@ -61,7 +61,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 
 	private String nick;
 	private Clase clase;
-	private int poder;
+	private int fuerza;
 	private int inteligencia;
 	private int agilidad;
 	private int oro;
@@ -74,7 +74,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		
 		this.nick = "Heroe";
 		this.clase = Clase.NINGUNA;
-		this.poder = 1;
+		this.fuerza = 1;
 		this.inteligencia = 1;
 		this.agilidad = 1;
 		this.oro = 0;
@@ -82,12 +82,12 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		
 	}
 	
-	public Jugador(String nick, Clase clase, int poder, int inteligencia, int agilidad, int oro,
+	public Jugador(String nick, Clase clase, int fuerza, int inteligencia, int agilidad, int oro,
 			int mazmorrasCompletadas) {
 		
 		this.nick = nick;
 		this.clase = clase;
-		this.poder = poder;
+		this.fuerza = fuerza;
 		this.inteligencia = inteligencia;
 		this.agilidad = agilidad;
 		this.oro = oro;
@@ -99,7 +99,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		
 		this.nick = j.getNick();
 		this.clase = j.getClase();
-		this.poder = j.getPoder();
+		this.fuerza = j.getFuerza();
 		this.inteligencia = j.getInteligencia();
 		this.agilidad = j.getAgilidad();
 		this.oro = j.getOro();
@@ -130,16 +130,16 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		this.clase = clase;
 	}
 	
-	public int getPoder() {
-		return poder;
+	public int getFuerza() {
+		return fuerza;
 	}
 	
-	public void setPoder(int poder) throws ExcepcionJugador {
+	public void setFuerza(int fuerza) throws ExcepcionJugador {
 		
-		if (poder > 0) {
-			this.poder = poder;
+		if (fuerza > 0) {
+			this.fuerza = fuerza;
 		}
-		else throw new ExcepcionJugador("Poder incorrecto");
+		else throw new ExcepcionJugador("Fuerza incorrecto");
 	}
 	
 	public int getInteligencia() {
@@ -188,7 +188,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 	
 	public int getDestreza() {
 		
-		return getPoder()+getAgilidad()+getInteligencia();
+		return getFuerza()+getAgilidad()+getInteligencia();
 		
 	}
 	
@@ -217,25 +217,25 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 	
 	
 	/*
-	 * Metodo: modificarPoder
+	 * Metodo: modificarFuerza
 	 * Comentario: Este método permite sumar (o restar)
-	 * 	una cantidad de poder a la perteneciente al jugador.
+	 * 	una cantidad de fuerza a la perteneciente al jugador.
 	 *  Si el resultado es menor a 1, se quedará a ese valor.
-	 * Signatura: void modificarPoder(int modificadorPoder)
+	 * Signatura: void modificarFuerza(int modificadorFuerza)
 	 * Precondiciones: no hay
-	 * Entradas: modificadorPoder (entero)
+	 * Entradas: modificadorFuerza (entero)
 	 * Salidas: no hay
 	 * E/S: no hay
-	 * Postcondiciones: El valor del poder del jugador 
+	 * Postcondiciones: El valor del fuerza del jugador 
 	 * 		se habrá modificado. Si el resultado es
 	 * 		menor a 1, se quedará a 1.
 	 * 
 	 */
 	
-	public void modificarPoder(int modificadorPoder) {
+	public void modificarFuerza(int modificadorFuerza) {
 		
-		if (getPoder() + modificadorPoder > 1) poder += modificadorPoder;
-		else poder = 1;
+		if (getFuerza() + modificadorFuerza > 1) fuerza += modificadorFuerza;
+		else fuerza = 1;
 	}
 	
 	/*
@@ -295,7 +295,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		try {
 			setNick("Heroe");
 			setClase(Clase.NINGUNA);
-			setPoder(1);
+			setFuerza(1);
 			setInteligencia(1);
 			setAgilidad(1);
 			setOro(0);
@@ -350,7 +350,7 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 	@Override
 	public String toString() {
 		
-		String s = this.getNick()+","+this.getClase()+","+this.getPoder()+","+this.getInteligencia();
+		String s = this.getNick()+","+this.getClase()+","+this.getFuerza()+","+this.getInteligencia();
 		s += ","+this.getAgilidad()+","+this.getOro()+","+this.getMazmorrasCompletadas();
 		
 		return s;

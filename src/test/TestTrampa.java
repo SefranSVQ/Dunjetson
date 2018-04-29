@@ -1,72 +1,43 @@
 package test;
 
-import clases.Trampa;
-import excepciones.ExcepcionTrampa;
- 
+import clases.Puzzle;
+import excepciones.ExcepcionEvento;
+
 public class TestTrampa {
 
 	public static void main(String[] args) {
 		
-		Trampa t1 = new Trampa();
-		Trampa t2 = new Trampa("Cepo",10);
-		Trampa t3 = new Trampa(t2);
-		int agilidad = 5;
+		Puzzle m = new Puzzle("cáscara de platano",5);
+		Puzzle m2 = new Puzzle();
+		Puzzle m3 = new Puzzle(m);
 		
-		System.out.println("Constructores");
-		System.out.println(t1.toString());
-		System.out.println(t2.toString());
-		System.out.println(t3.toString());
-		
-		System.out.println("\nCambio de variables en la trampa 3");
-		t3.setNombre("Positivo en programación");
 		try {
-			t3.setPoder(-1);
-		} catch (ExcepcionTrampa e) {}
-		try {
-			t3.setPoder(Integer.MAX_VALUE);
-		} catch (ExcepcionTrampa e) {}
-		
-		System.out.println("\nNuevos valores\n"+t3.toString());
-		
-		System.out.println("\nComparacion de trampas");
-		System.out.println(t2.compareTo(t1));
-		System.out.println(t2.compareTo(t2));
-		System.out.println(t2.compareTo(t3));
-		
-		System.out.println("\nComparacion de igualdad");
-		System.out.println(t2.equals(t1));
-		System.out.println(t2.equals(t2));
-		System.out.println(t2.equals(t3));
-		
-		System.out.println("\nHashcodes");
-		System.out.println(t1.hashCode());
-		System.out.println(t2.hashCode());
-		System.out.println(t3.hashCode());
-		
-		System.out.println("\nMetodo Trampa2.esquivarTrampa con agilidad == 5 (50%)");
-		System.out.println(t2.esquivarTrampa(5));
-		System.out.println(t2.esquivarTrampa(5));
-		System.out.println(t2.esquivarTrampa(5));
-		System.out.println(t2.esquivarTrampa(5));
-		
-		System.out.println("\nMetodo Trampa2.esquivarTrampa con agilidad == 0 (0%)");
-		System.out.println(t2.esquivarTrampa(0));
-		System.out.println(t2.esquivarTrampa(0));
-		System.out.println(t2.esquivarTrampa(0));
-		System.out.println(t2.esquivarTrampa(0));
-		
-		System.out.println("\nMetodo Trampa2.esquivarTrampa con agilidad == 10 (100%)");
-		System.out.println(t2.esquivarTrampa(10));
-		System.out.println(t2.esquivarTrampa(10));
-		System.out.println(t2.esquivarTrampa(10));
-		System.out.println(t2.esquivarTrampa(10));
-		
-		System.out.println("\n Metodo generarRecompensaDeAgilidad");
-		System.out.println(t1.generarRecompensaDeAgilidad(agilidad));
-		System.out.println(t2.generarRecompensaDeAgilidad(agilidad));
-		System.out.println(t3.generarRecompensaDeAgilidad(agilidad));
-		
+			m3.setDificultadBase(20);
+		} catch (ExcepcionEvento e) {}
 
+		System.out.println(m.toString());
+		
+		System.out.println("\nMetodos de la clase padre:");
+		System.out.println("\n\t calcularDificultad con niveles 1, 50 y 200");
+		System.out.println(m.calcularDificultad(1));
+		System.out.println(m.calcularDificultad(50));
+		System.out.println(m.calcularDificultad(200));
+		
+		System.out.println("\n\t calcularRecompensa con niveles 1, 50 y 200");
+		System.out.println(m.calcularRecompensa(1));
+		System.out.println(m.calcularRecompensa(50));
+		System.out.println(m.calcularRecompensa(200));
+		
+		System.out.println("\ncomparaciones");
+		System.out.println(m.compareTo(m2));
+		System.out.println(m.compareTo(m));
+		System.out.println(m.compareTo(m3));
+		
+		System.out.println("\n Igualdad");
+		System.out.println(m.equals(m2));
+		System.out.println(m.equals(m));
+		System.out.println(m.equals(m3));
+	
 	}
 
 }

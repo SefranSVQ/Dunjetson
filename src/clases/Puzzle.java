@@ -1,163 +1,64 @@
+package clases;
+
 /*
  * Clase Puzzle
  * 
- * 		Atributos básicos:
- * 			- Nombre: String, consultable y modificable.
- * 			- Respuesta: String, consultable y modificable.
- * 			- Recompensa: entero, consultable y modificable. //Será una recompensa de inteligencia
+ * 		clase hija de "Evento"
  * 
- * 		Restricciones:
- * 			- La recompensa debe ser un valor igual o mayor a 0.
+ * 		Atributos propios: ninguno.
  * 
- * 
- * 		Criterio de comparacion e igualdad: Recompensa
- * 
+ * 		criterio de comparacion / igualdad: dificultadBase
  */
 
-/* interface
- * 
- *  String getNombre()
- *  void setNombre(String nombre)
- * 
- *  String getRespuesta()
- *  void setRespuesta(String respuesta)
- *  
- *  String getRecompensa()
- *  void setRecompensa(int recompensa)
- * 
- * 
- */
+public class Puzzle extends Evento implements Comparable<Puzzle>{
 
-package clases;
-
-import excepciones.ExcepcionPuzzle;
-
-public class Puzzle implements Comparable<Puzzle> {
-
-	private String nombre;
-	private String respuesta;
-	private int recompensa;
 	
-	
-	// Recompensa
-	
+	//Constructores
 	public Puzzle() {
-		
-		nombre = "NoName";
-		respuesta = "NoAnswer";
-		recompensa = 0;
-		
+		super();
 	}
-	
-	public Puzzle(String nombre, String respuesta, int recompensa) {
-		
-		this.nombre = nombre;
-		this.respuesta = respuesta;
-		this.recompensa = recompensa;
-		
-	}
-	
+
 	public Puzzle(Puzzle p) {
-		
-		this.nombre = p.getNombre();
-		this.respuesta = p.getRespuesta();
-		this.recompensa = p.getRecompensa();
-				
+		super(p);
 	}
 
-	
-	// Getters y Setters
-	
-	public String getNombre() {
-		return nombre;
+	public Puzzle(String nombre, int dificultadBase) {
+		super(nombre, dificultadBase);
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
-	}
-
-	public int getRecompensa() {
-		return recompensa;
-	}
-
-	public void setRecompensa(int recompensa) throws ExcepcionPuzzle {
-		if (recompensa >= 0) this.recompensa = recompensa;
-		else throw new ExcepcionPuzzle("Recompensa Incorrecta");
-	}
-
-	
-	//Metodos
-	
-	public int compareTo(Puzzle p) {
-
-		int comparacion = -1;
-		
-		if (this.getRecompensa() == p.getRecompensa()) comparacion = 0;
-		else if (this.getRecompensa() > p.getRecompensa() ) comparacion = 1;
-		
-		return comparacion;
-	}
-	
-	@Override
-	public String toString() {
-		
-		String s = this.getNombre()+","+this.getRespuesta()+","+this.getRecompensa();
-		
-		return s;
-		
-	}
-	
-	@Override 
-	public int hashCode() {
-		
-		int code = (int) (getNombre().hashCode()-getRespuesta().hashCode())+getRecompensa();
-		
-		return code;
-		
-	}
+	// Metodos
 	
 	@Override
 	public boolean equals(Object o) {
 		
-		boolean equal = false;
+		boolean igual = false;
 		
-		if (o != null && o instanceof Puzzle) {
+		if (o != null & o instanceof Puzzle) {
 			
 			Puzzle p = (Puzzle) o;
 			
-			if (this.getRecompensa() == p.getRecompensa()) equal = true; 
+			if (p.getDificultadBase() == this.getDificultadBase()) {
+			
+				igual = true;
+				
+			}
 			
 		}
 		
-		return equal;
-
+		return igual;
+		
+	}	
+	
+	public int compareTo(Puzzle p) {
+		
+		int comparacion = -1;
+		
+		if (this.getDificultadBase() == p.getDificultadBase()) comparacion = 0;
+		else if (this.getDificultadBase() > p.getDificultadBase()) comparacion = 1;
+		
+		return comparacion;
+		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

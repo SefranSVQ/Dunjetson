@@ -1,132 +1,221 @@
-/*
- * Clase Jefe
- * 		
- * 		Clase hija de "Monstruo"
- * 		
- * 		Atributos básicos:
- * 			- inteligencia: entero, consultable y modificable
- * 			- agilidad: entero, consultable y modificable
- * 			- bonusDestreza: entero, consultable y modificable
- * 
- * 		Atributos derivados:
- * 			- Destreza: entero, consultable //poder+inteligencia+agilidad+bonusDestreza
- * 
- * 		Metodos añadidos:
- * 			- generarRecompensaDeOro //Metodo sobreescrito. Se tomará el valor de la destreza.
- * 
- * 		Restricciones:
- * 			- La inteligencia debe ser un valor igual o superior a 0
- * 			- La agilidad debe ser un valor igual o superior a 0
- * 			- El bonus de destreza debe ser u valor igual o superior a 0
- * 
- * 		Criterios de igualdad y comparación: destreza
- * 
- */
-
-/*
- * getters y setters
- * 
- * int getInteligencia()
- * void setInteligencia(int inteligencia)
- * 
- * int getAgilidad()
- * void setAgilidad(int agilidad)
- * 
- * int getBonusDestreza()
- * void setBonusDestreza(int bonusDestreza)
- * 
- * int getDestreza()
- * 
- * 
- * 
- */
-
 package clases;
 
 import java.util.Random;
+
+/*
+ * Clase Jefe
+ * 
+ * 		clase hija de "Evento"
+ * 
+ * 		Atributos básicos propios: 
+ * 			- fuerza: entero, consultable y modificable.
+ * 			- inteligencia: entero, consultable y modificable.
+ * 			- agilidad: entero, consultable y modificable.
+ * 
+ * 		Atributos derivados:
+ * 			- destreza: entero, consultable
+ * 
+ * 		Restricciones:
+ * 			- fuerza > 0
+ * 			- inteligencia > 0
+ * 			- agilidad > 0
+ * 
+ * 		Metodos añadidos:
+ * 			- calcularDificultadFuerza
+ * 			- calcularDificultadInteligencia
+ * 			- calcularDificultadAgilidad
+ * 			- calcularDificultad (sobreescrito)
+ * 			- calcularRecompensa (sobreescrito)
+ * 			
+ */
+
 import excepciones.ExcepcionJefe;
 
-public class Jefe extends Monstruo {
+public class Jefe extends Evento implements Comparable<Jefe>{
 
+	private int fuerza;
 	private int inteligencia;
 	private int agilidad;
-	private int bonusDestreza;
-
 	
-	//constructores
-	
+	//Constructores
 	public Jefe() {
-		
 		super();
-		inteligencia = 0;
-		agilidad = 0;
-		bonusDestreza = 0;
-		
+		fuerza = 1;
+		inteligencia = 1;
+		agilidad = 1;
 	}
-	
-	public Jefe (String nombre, int poder, int inteligencia, int agilidad, int bonusDestreza) {
-		
-		super(nombre, poder);
+
+	public Jefe(Jefe j) {
+		super(j);
+		fuerza = j.getFuerza();
+		inteligencia = j.getInteligencia();
+		agilidad = j.getAgilidad();
+	}
+
+	public Jefe(String nombre, int dificultadBase, int fuerza, int inteligencia, int agilidad) {
+		super(nombre, dificultadBase);
+		this.fuerza = fuerza;
 		this.inteligencia = inteligencia;
 		this.agilidad = agilidad;
-		this.bonusDestreza = bonusDestreza;
-		
 	}
 	
-	public Jefe (Jefe jefe) {
-		
-		super(jefe.getNombre(), jefe.getPoder());
-		this.inteligencia = jefe.getInteligencia();
-		this.agilidad = jefe.getAgilidad();
-		this.bonusDestreza = jefe.getBonusDestreza();
-		
-	}
-
-
+	
 	// Getters y setters
 	
+	public int getFuerza() {
+		return fuerza;
+	}
+
+	public void setFuerza(int fuerza) throws ExcepcionJefe{
+		if (fuerza < 1) throw new ExcepcionJefe("Valor de fuerza incorrecto");
+		else this.fuerza = fuerza;
+	}
+
 	public int getInteligencia() {
 		return inteligencia;
 	}
 
-
 	public void setInteligencia(int inteligencia) throws ExcepcionJefe {
-		
-		if (inteligencia > 0) this.inteligencia = inteligencia;
-		else throw new ExcepcionJefe("Inteligencia incorrecta");
-			
+		if (inteligencia < 1) throw new ExcepcionJefe("Valor de inteligencia incorrecto");
+		else this.inteligencia = inteligencia;
 	}
-
 
 	public int getAgilidad() {
 		return agilidad;
 	}
 
-
 	public void setAgilidad(int agilidad) throws ExcepcionJefe {
-		
-		if (agilidad > 0) this.agilidad = agilidad;
-		else throw new ExcepcionJefe("Agilidad incorrecta");
-	}
-
-
-	public int getBonusDestreza() {
-		return bonusDestreza;
-	}
-
-
-	public void setBonusDestreza(int bonusDestreza) throws ExcepcionJefe {
-		if (bonusDestreza > 0) this.bonusDestreza = bonusDestreza;
-		else throw new ExcepcionJefe("Bonus de destreza incorrecto");
+		if (fuerza < 1) throw new ExcepcionJefe("Valor de agilidad incorrecto");
+		else this.agilidad = agilidad;
 	}
 	
 	public int getDestreza() {
+		return this.getAgilidad()+this.getFuerza()+this.getInteligencia()+this.getDificultadBase();
+	}
+
+
+	// Metodos
+	
+	/*
+	 * calcularDificultadFuerza
+	 * 
+	 * este método calculará la dificultad del jefe en el enfrentamiento de fuerza
+	 * en función del nivel en el que se encuentre el jugador.
+	 * 
+	 * precondiciones: el nivel debe ser un valor positivo
+	 * entradas: nivel (entero)
+	 * salidas: dificultad (entero)
+	 * E/S: no hay
+	 * 
+	 * 
+	 */
+	
+	public int calcularDificultadFuerza(int nivel) {
 		
-		return super.getPoder()+this.getAgilidad()+this.getInteligencia()+this.getBonusDestreza();
+		int dificultad;
+		
+		dificultad = (int) (this.getFuerza()+(this.getFuerza()*nivel/25));
+		
+		return dificultad;
 		
 	}
 	
-	//Métodos
+	/*
+	 * calcularDificultadInteligencia
+	 * 
+	 * este método calculará la dificultad del jefe en el enfrentamiento de inteligencia
+	 * en función del nivel en el que se encuentre el jugador.
+	 * 
+	 * precondiciones: el nivel debe ser un valor positivo
+	 * entradas: nivel (entero)
+	 * salidas: dificultad (entero)
+	 * E/S: no hay
+	 * 
+	 * 
+	 */
+	
+	public int calcularDificultadInteligencia(int nivel) {
+		
+		int dificultad;
+		
+		dificultad = (int) (this.getInteligencia()+(this.getInteligencia()*nivel/25));
+		
+		return dificultad;
+		
+	}
+	
+	/*
+	 * calcularDificultadAgilidad
+	 * 
+	 * este método calculará la dificultad del jefe en el enfrentamiento de agilidad
+	 * en función del nivel en el que se encuentre el jugador.
+	 * 
+	 * precondiciones: el nivel debe ser un valor positivo
+	 * entradas: nivel (entero)
+	 * salidas: dificultad (entero)
+	 * E/S: no hay
+	 * 
+	 * 
+	 */
+	
+	public int calcularDificultadAgilidad(int nivel) {
+		
+		int dificultad;
+		
+		dificultad = (int) (this.getAgilidad()+(this.getAgilidad()*nivel/25));
+		
+		return dificultad;
+		
+	}
+	
+	/*
+	 * calcularDificultad
+	 * 
+	 * este método calculará la dificultad del jefe en el enfrentamiento final 
+	 * en función del nivel en el que se encuentre el jugador.
+	 * 
+	 * precondiciones: el nivel debe ser un valor positivo
+	 * entradas: nivel (entero)
+	 * salidas: dificultad (entero)
+	 * E/S: no hay
+	 * 
+	 * 
+	 */
+	
+	@Override
+	public int calcularDificultad(int nivel) {
+		
+		int dificultad;
+		
+		dificultad = (int) (this.getDestreza()+(this.getDestreza()*nivel/25));
+		
+		return dificultad;
+		
+	}
+	
+	/*
+	 * calcularRecompensa
+	 * 
+	 * este método calculará la recompensa del jefe en función
+	 * del nivel en el que se encuentre el jugador.
+	 * 
+	 * precondiciones: el nivel debe ser un valor positivo
+	 * entradas: nivel (entero)
+	 * salidas: recompensa (entero)
+	 * E/S: no hay
+	 */
+	
+	@Override
+	public int calcularRecompensa(int nivel) {
+		
+		int recompensa;
+		Random rm = new Random();
+		
+		recompensa = (int) (this.getDestreza()+rm.nextInt(this.getDestreza()*nivel)/20);
+		
+		return recompensa;
+		
+	}
 	
 	@Override
 	public boolean equals(Object o) {
@@ -135,9 +224,9 @@ public class Jefe extends Monstruo {
 		
 		if (o != null & o instanceof Jefe) {
 			
-			Jefe j = (Jefe) o;
+			Jefe p = (Jefe) o;
 			
-			if (j.getDestreza() == this.getDestreza()) {
+			if (p.getDificultadBase() == this.getDificultadBase()) {
 			
 				igual = true;
 				
@@ -147,61 +236,26 @@ public class Jefe extends Monstruo {
 		
 		return igual;
 		
-	}
-
-	@Override
-	public int hashCode() {
+	}	
 	
-		int code = (int) this.getDestreza()*7+this.getNombre().hashCode();
-		
-		return code;
-	}
-
 	@Override
 	public String toString() {
+		String s;
 		
-		String s = super.toString()+","+this.getInteligencia()+","+this.getAgilidad()+","+this.getBonusDestreza();
+		s = this.getNombre()+","+this.getDificultadBase()+","+this.getFuerza()+","+this.getInteligencia()+","+this.getAgilidad();
 		
 		return s;
-		
 	}
 	
-	public int compareTo(Jefe j) {
+	public int compareTo(Jefe p) {
 		
 		int comparacion = -1;
 		
-		if (this.getDestreza() == j.getDestreza()) comparacion = 0;
-		else if (this.getDestreza() > j.getDestreza()) comparacion = 1;
+		if (this.getDificultadBase() == p.getDificultadBase()) comparacion = 0;
+		else if (this.getDificultadBase() > p.getDificultadBase()) comparacion = 1;
 		
 		return comparacion;
 		
 	}
 	
-	/*
-	 * Método generarRecompensaDeOro
-	 * Comentario: devuelve una cantidad de oro en función
-	 * de la destreza del jefe. 
-	 * Signatura: int generarRecompensaDeOro()
-	 * Precondiciones: no hay
-	 * E: no hay
-	 * S: un valor entero
-	 * E/S: no hay
-	 * Postcondiciones: el método devolverá un valor entero correspondiente
-	 * 	al oro generado de un jefe al ser derrotado.
-	 */
-	
-	@Override
-	public int generarRecompensaDeOro() {
-		
-		int oro = 0;
-		Random rng = new Random();
-		
-		oro = (int) (getDestreza()+rng.nextInt(getDestreza())/5)+1;
-		
-		return oro;
-		
-	}
-	
-	
-
 }

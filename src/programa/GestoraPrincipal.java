@@ -194,7 +194,7 @@ public class GestoraPrincipal {
 										try {
 											jugadorActual.setNick(nombre);
 											jugadorActual.setClase(Clase.GUERRERO);
-											jugadorActual.setPoder(5);
+											jugadorActual.setFuerza(5);
 											jugadorActual.setInteligencia(3);
 											jugadorActual.setAgilidad(3);
 											jugadorActual.setOro(10);
@@ -206,7 +206,7 @@ public class GestoraPrincipal {
 										try {
 											jugadorActual.setNick(nombre);
 											jugadorActual.setClase(Clase.MAGO);
-											jugadorActual.setPoder(3);
+											jugadorActual.setFuerza(3);
 											jugadorActual.setInteligencia(5);
 											jugadorActual.setAgilidad(3);
 											jugadorActual.setOro(10);
@@ -218,7 +218,7 @@ public class GestoraPrincipal {
 										try {
 											jugadorActual.setNick(nombre);
 											jugadorActual.setClase(Clase.LADRON);
-											jugadorActual.setPoder(3);
+											jugadorActual.setFuerza(3);
 											jugadorActual.setInteligencia(3);
 											jugadorActual.setAgilidad(5);
 											jugadorActual.setOro(10);
@@ -230,7 +230,7 @@ public class GestoraPrincipal {
 										try {
 											jugadorActual.setNick(nombre);
 											jugadorActual.setClase(Clase.COMERCIANTE);
-											jugadorActual.setPoder(3);
+											jugadorActual.setFuerza(3);
 											jugadorActual.setInteligencia(3);
 											jugadorActual.setAgilidad(3);
 											jugadorActual.setOro(20);

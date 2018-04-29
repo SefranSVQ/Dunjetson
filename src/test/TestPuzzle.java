@@ -1,59 +1,43 @@
 package test;
 
 import clases.Puzzle;
-import excepciones.ExcepcionPuzzle;
- 
+import excepciones.ExcepcionEvento;
+
 public class TestPuzzle {
 
 	public static void main(String[] args) {
+		
+		Puzzle m = new Puzzle("puzzle de 2 piezas",5);
+		Puzzle m2 = new Puzzle();
+		Puzzle m3 = new Puzzle(m);
+		
+		try {
+			m3.setDificultadBase(20);
+		} catch (ExcepcionEvento e) {}
 
-		Puzzle p1 = new Puzzle();
-		Puzzle p2 = new Puzzle("1+1","2",1);
-		Puzzle p3 = new Puzzle(p2);
+		System.out.println(m.toString());
 		
-		System.out.println("Puzzle 1: Constructor sin att.");
-		System.out.println(p1.toString());
+		System.out.println("\nMetodos de la clase padre:");
+		System.out.println("\n\t calcularDificultad con niveles 1, 50 y 200");
+		System.out.println(m.calcularDificultad(1));
+		System.out.println(m.calcularDificultad(50));
+		System.out.println(m.calcularDificultad(200));
 		
-		System.out.println("Puzzle 2: Constructor con att");
-		System.out.println(p2.toString());
+		System.out.println("\n\t calcularRecompensa con niveles 1, 50 y 200");
+		System.out.println(m.calcularRecompensa(1));
+		System.out.println(m.calcularRecompensa(50));
+		System.out.println(m.calcularRecompensa(200));
 		
-		System.out.println("Puzzle 3: Constructor copia.");
-		System.out.println(p3.toString());
+		System.out.println("\ncomparaciones");
+		System.out.println(m.compareTo(m2));
+		System.out.println(m.compareTo(m));
+		System.out.println(m.compareTo(m3));
 		
-		
-		System.out.println("\nPuzzles: cambio de variables.");
-		p1.setNombre("Formula química del agua (En Mayusculas)");
-		p1.setRespuesta("H2O");
-		try {
-			p1.setRecompensa(3);
-		} catch (ExcepcionPuzzle e) {}
-		try {
-			p3.setRecompensa(-10);
-		} catch (ExcepcionPuzzle e) {}
-		try {
-			p3.setRecompensa(0);
-		} catch (ExcepcionPuzzle e) {}
-		
-		System.out.println("\nPuzzles: cambio de variables, resultado");
-		System.out.println(p1.toString());
-		System.out.println(p2.toString());
-		System.out.println(p3.toString());
-
-		System.out.println("\nComparacion de puzzle 2 con los 3 puzzles");
-		System.out.println(p2.compareTo(p1));
-		System.out.println(p2.compareTo(p2));
-		System.out.println(p2.compareTo(p3));
-		
-		System.out.println("\nComparación de igualdad de puzzle 2 con los 3 puzzles");
-		System.out.println(p2.equals(p1));
-		System.out.println(p2.equals(p2));
-		System.out.println(p2.equals(p3));
-		
-		System.out.println("\nHashcodes");
-		System.out.println(p1.hashCode());
-		System.out.println(p2.hashCode());
-		System.out.println(p3.hashCode());
-		
+		System.out.println("\n Igualdad");
+		System.out.println(m.equals(m2));
+		System.out.println(m.equals(m));
+		System.out.println(m.equals(m3));
+	
 	}
-
+	
 }

@@ -1,5 +1,5 @@
 Salir.
-Jolsensei,MAGO,3,5,3,10,0
-Ezhor,GUERRERO,5,3,3,10,0
-Toms_s,LADRON,3,3,5,10,0
-Patata,GUERRERO,5,3,3,10,0
+Heroe,NINGUNA,1,1,1,0,0
+Heroe,NINGUNA,1,1,1,0,0
+Heroe,NINGUNA,1,1,1,0,0
+Heroe,NINGUNA,1,1,1,0,0

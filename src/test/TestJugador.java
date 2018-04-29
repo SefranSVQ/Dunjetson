@@ -31,7 +31,7 @@ public class TestJugador {
 		j3.setClase(Clase.LADRON);
 		
 		try {
-			j3.setPoder(0);
+			j3.setFuerza(0);
 		} catch (ExcepcionJugador e) {}
 		
 		try {
@@ -60,7 +60,7 @@ public class TestJugador {
 		j3.setClase(Clase.MAGO);
 		
 		try {
-			j3.setPoder(3);
+			j3.setFuerza(3);
 		} catch (ExcepcionJugador e) {}
 		
 		try {
@@ -103,14 +103,14 @@ public class TestJugador {
 			j1.modificarOro(1);
 		} catch (ExcepcionJugador e) {}
 		
-		j1.modificarPoder(7);
+		j1.modificarFuerza(7);
 		j1.modificarInteligencia(7);
 		j1.modificarAgilidad(7);
 		
 		System.out.println("Nuevas estadisticas del jugador 1:");
 		System.out.println(j1.toString());
 		
-		j1.modificarPoder(-77);
+		j1.modificarFuerza(-77);
 		j1.modificarInteligencia(-77);
 		j1.modificarAgilidad(-77);
 		
