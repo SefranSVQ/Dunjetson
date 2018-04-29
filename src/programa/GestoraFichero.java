@@ -108,13 +108,13 @@ public class GestoraFichero {
 	
 	public static void pintarPartidasGuardadas(String[] partidas) {
 		
-		System.out.println("---- Partidas guardadas ----: ");
-		System.out.println("Att: Nick, Clase, Pod, Int, Agi, Oro, MazCompletadas");
-		System.out.println("0 - "+partidas[0]);
-		System.out.println("1 - "+partidas[1]);
-		System.out.println("2 - "+partidas[2]);
-		System.out.println("3 - "+partidas[3]);
-		System.out.println("4 - "+partidas[4]);
+		System.out.println("\t ---- Partidas guardadas ----: ");
+		System.out.println("\t Att: Nick, Clase, Pod, Int, Agi, Oro, MazCompletadas");
+		System.out.println("\t 0 - "+partidas[0]);
+		System.out.println("\t 1 - "+partidas[1]);
+		System.out.println("\t 2 - "+partidas[2]);
+		System.out.println("\t 3 - "+partidas[3]);
+		System.out.println("\t 4 - "+partidas[4]);
 		
 	}
 	

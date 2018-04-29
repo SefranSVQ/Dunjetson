@@ -25,9 +25,9 @@ public class TestGestoraFichero {
 		GestoraFichero.guardarPartidasEnArray(partidas);
 		GestoraFichero.pintarPartidasGuardadas(partidas);
 		
-		jugador2 = GestoraFichero.cargarJugador(2);
+		jugador2 = GestoraFichero.cargarJugador(1);
 		
-		System.out.println(jugador.toString());
+		System.out.println(jugador2.toString());
 		
 		
 

@@ -303,6 +303,97 @@ public class Jugador implements Cloneable, Comparable <Jugador>{
 		} catch (ExcepcionJugador e) {}
 	}
 	
+	/*
+	 * pintarEstadisticas
+	 * 
+	 * este método pinta de manera bonita las estdisticas del jugador.
+	 * 
+	 * sin entradas/salidas
+	 * 
+	 */
+	
+	public void pintarEstadisticas() {
+		
+		System.out.println("---- ---- ---- ---- ---- ---- ---- ---- ---- ----");
+		System.out.println("Jugador: "+this.getNick());
+		System.out.println("Clase: "+ this.getClase());
+		System.out.println("Fuerza: "+ this.getFuerza() + " - Inteligencia: " + this.getInteligencia() + " - Agilidad: " + this.getAgilidad());
+		System.out.println("Oro : "+this.getOro() + " - Mazmorras completadas: "+ this.getMazmorrasCompletadas());
+		System.out.println("---- ---- ---- ---- ---- ---- ---- ---- ---- ----");
+		
+	}
+	
+	/*
+	 * 
+	 * iniciarEstadisticas
+	 * 
+	 * este método inicia con valores predeterminados
+	 * las estadisticas del jugador en función de la
+	 * clase seleccionada.
+	 * 
+	 * entradas: nombre (string), clase (string)
+	 * salidas: no hay
+	 * E/S: no hay
+	 * 
+	 * postcondiciones: el jugador tendrá los valores por defecto
+	 * 	de la clase seleccionada.
+	 * 
+	 * 
+	 */
+	
+	public void iniciarEstadisticas(String nombre, String clase) {
+		
+		switch (clase) {
+		case "guerrero": 
+			try {
+				this.setNick(nombre);
+				this.setClase(Clase.GUERRERO);
+				this.setFuerza(5);
+				this.setInteligencia(3);
+				this.setAgilidad(3);
+				this.setOro(10);
+				this.setMazmorrasCompletadas(0);
+			} catch (ExcepcionJugador e) {}
+		break;
+		
+		case "mago":
+			try {
+				this.setNick(nombre);
+				this.setClase(Clase.MAGO);
+				this.setFuerza(3);
+				this.setInteligencia(5);
+				this.setAgilidad(3);
+				this.setOro(10);
+				this.setMazmorrasCompletadas(0);
+			} catch (ExcepcionJugador e) {}
+		break;
+			
+		case "ladron": 
+			try {
+				this.setNick(nombre);
+				this.setClase(Clase.LADRON);
+				this.setFuerza(3);
+				this.setInteligencia(3);
+				this.setAgilidad(5);
+				this.setOro(10);
+				this.setMazmorrasCompletadas(0);
+			} catch (ExcepcionJugador e) {}
+		break;
+		
+		case "comerciante": 
+			try {
+				this.setNick(nombre);
+				this.setClase(Clase.COMERCIANTE);
+				this.setFuerza(3);
+				this.setInteligencia(3);
+				this.setAgilidad(3);
+				this.setOro(20);
+				this.setMazmorrasCompletadas(0);
+			} catch (ExcepcionJugador e) {}
+		break;
+	}
+	}
+	
 	@Override
 	public Jugador clone(){
 		

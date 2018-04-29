@@ -115,24 +115,29 @@
  * 
  * // iniciarPartida
  * 
+ *
  * inicio
- *  mostrarMenuJuegoYObtenerYValidarOpcionJuego
- *  si (opcionJuego != -1)
- *  	segun (opcionJuego)
- *  		caso 0: jugarTutorial
- *  		caso 1: jugarMazmorra1
- *  		caso 2: jugarMazmorra2
- *  		caso 3: jugarMazmorra3
- *  		caso 4: jugarMazmorra4
- *  		caso 5: jugarMazmorra5
- *  		caso 6: jugarMazmorra6
- *  		caso 7: jugarMazmorra7
- *  		caso 8: jugarMazmorra8
- *  		caso 9: jugarMazmorra9
+ *  mostrarMenuJuegoYObtenerYValidarOpcionMenuJuego
+ *  si (opcionMenuJuego != 'S')
+ *  	segun (opcionMenuJuego)
+ *  		caso 'E': mostrarEstadisticasJugador
+ *  		caso 'T': mostrarTienda
+ *  		caso '0': jugarTutorial
+ *  		caso '1': jugarMazmorra1
+ *  		caso '2': jugarMazmorra2
+ *  		caso '3': jugarMazmorra3
+ *  		caso '4': jugarMazmorra4
+ *  		caso '5': jugarMazmorra5
+ *  		caso '6': jugarMazmorra6
+ *  		caso '7': jugarMazmorra7
+ *  		caso '8': jugarMazmorra8
+ *  		caso '9': jugarMazmorra9
  *  	fin segun
  *  	guardarPartida
  *  fin si
  * fin
+ * 
+ *
  * 
  * // jugarTutorial
  * 

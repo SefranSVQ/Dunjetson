@@ -1,17 +1,12 @@
 package programa;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import clases.Clase;
 import clases.Jugador;
-import excepciones.ExcepcionJugador;
 
 public class GestoraPrincipal {
 
@@ -32,6 +27,7 @@ public class GestoraPrincipal {
 		
 		//Variables de menus
 		int opcionMenuPrincipal = 0;
+		char opcionMenuJuego = ' ';
 		char confirmacionJugador = 'S';
 		char confirmacionGuardado = 'S';
 		char confirmacionBorrado = 'S';
@@ -42,7 +38,9 @@ public class GestoraPrincipal {
 		//Objetos IO
 		Scanner sc = new Scanner(System.in);
 		File save = new File("src/archivos/save.txt");
-		Clip sonido = null;
+		Clip musicaIntro = null;
+		Clip musicaJuego = null;
+		
 		//Si es la primera vez que se ejecuta, creamos el fichero save.txt
 		// con los valores por defecto.
 		if (!save.exists()) {
@@ -55,25 +53,16 @@ public class GestoraPrincipal {
 		String clase = " ";
 		String[] partidas = new String[5];
 		GestoraFichero.guardarPartidasEnArray(partidas);
-		
-		//Inicio
-		
+			
 			//Preparativos pre-juego
 		
 		
 		//reproducimos la musica
-		try {
-			sonido = AudioSystem.getClip();
-			sonido.open(AudioSystem.getAudioInputStream(new File("src/archivos/intro.wav")));
-		} catch (LineUnavailableException e) {} catch (IOException e) {} 
-		catch (UnsupportedAudioFileException e) {}
-		sonido.start();
-		sonido.loop(100);
+		
 		 
 		//Inicio
 		
-		//paramos el tiempo 2 segundos y pintamos titulo
-		System.out.println("   ");
+		musicaIntro = GestoraMusica.iniciarMusicaPrincipal();
 		UtilJuego.pararTiempo(2000); 
 		pintarTitulo();
 
@@ -86,9 +75,7 @@ public class GestoraPrincipal {
 			do {
 				//si anteriormente se jugó, reiniciamos la canción.
 				if (opcionMenuPrincipal == 1 || opcionMenuPrincipal == 2 && espacioGuardado != 0) {
-					sonido.setMicrosecondPosition(0);
-					sonido.start();
-					sonido.loop(100);
+					GestoraMusica.reiniciarMusicaPrincipal(musicaIntro);
 				}
 				
 				pintarMenuPrincipal();
@@ -107,16 +94,9 @@ public class GestoraPrincipal {
 				
 				switch (opcionMenuPrincipal) {
 				
-					case 1:
-						//nuevaPartida
-					
-						System.out.println("Bienvenido a Dunjetson. Estás a punto de descubrir\n"
-								+ "una gran gran aventura llena de retos. ¿estás preparado? \n \n"
-								+ "Pulsa intro para continuar.\n");
+					case 1: //nuevaPartida
 						
-						sc.nextLine();
-						
-						UtilJuego.limpiarPantalla(50);
+						UtilJuego.limpiarPantalla(20);
 						
 						System.out.println("Una gran montaña ha surgido de la nada en medio de \" El río Grande \".\n"
 								+ "Muchos aventureros han decidido buscar fortuna en ella, pero tú sientes\n"
@@ -162,12 +142,9 @@ public class GestoraPrincipal {
 						
 						do {
 							
-							//Nos aseguramos de que las partidas están actualizadas en el array
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige espacio donde guardar: \n");
-							
-							//y aquí las mostramos por pantalla.
 							GestoraFichero.pintarPartidasGuardadas(partidas);
 							
 							try {
@@ -189,75 +166,23 @@ public class GestoraPrincipal {
 								
 							if (confirmacionGuardado == 'S') {
 								
-								switch (clase) {
-									case "guerrero": 
-										try {
-											jugadorActual.setNick(nombre);
-											jugadorActual.setClase(Clase.GUERRERO);
-											jugadorActual.setFuerza(5);
-											jugadorActual.setInteligencia(3);
-											jugadorActual.setAgilidad(3);
-											jugadorActual.setOro(10);
-											jugadorActual.setMazmorrasCompletadas(0);
-										} catch (ExcepcionJugador e) {}
-									break;
-									
-									case "mago":
-										try {
-											jugadorActual.setNick(nombre);
-											jugadorActual.setClase(Clase.MAGO);
-											jugadorActual.setFuerza(3);
-											jugadorActual.setInteligencia(5);
-											jugadorActual.setAgilidad(3);
-											jugadorActual.setOro(10);
-											jugadorActual.setMazmorrasCompletadas(0);
-										} catch (ExcepcionJugador e) {}
-									break;
-										
-									case "ladron": 
-										try {
-											jugadorActual.setNick(nombre);
-											jugadorActual.setClase(Clase.LADRON);
-											jugadorActual.setFuerza(3);
-											jugadorActual.setInteligencia(3);
-											jugadorActual.setAgilidad(5);
-											jugadorActual.setOro(10);
-											jugadorActual.setMazmorrasCompletadas(0);
-										} catch (ExcepcionJugador e) {}
-									break;
-									
-									case "comerciante": 
-										try {
-											jugadorActual.setNick(nombre);
-											jugadorActual.setClase(Clase.COMERCIANTE);
-											jugadorActual.setFuerza(3);
-											jugadorActual.setInteligencia(3);
-											jugadorActual.setAgilidad(3);
-											jugadorActual.setOro(20);
-											jugadorActual.setMazmorrasCompletadas(0);
-										} catch (ExcepcionJugador e) {}
-									break;
-								}
+								jugadorActual.iniciarEstadisticas(nombre, clase);
 								
 								GestoraFichero.guardarJugadorEnPosicion(jugadorActual, espacioGuardado);
+								
 							}
 						}
 						
 						
 					break;
 					
-					case 2:
-						
-						//Cargar partida
+					case 2: //Cargar partida
 						
 						do {
 							
-							//Nos aseguramos de que las partidas están actualizadas en el array
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a cargar: \n");
-							
-							//y aquí las mostramos por pantalla.
 							GestoraFichero.pintarPartidasGuardadas(partidas);
 							
 							try {
@@ -270,8 +195,15 @@ public class GestoraPrincipal {
 						
 						if (espacioGuardado != 0) {
 							
-							//cargarJugador
-							GestoraFichero.cargarJugador(espacioGuardado);
+							jugadorActual = GestoraFichero.cargarJugador(espacioGuardado);
+							
+							if (jugadorActual.getClase() == Clase.NINGUNA) {
+								
+								System.out.println("Esa partida no tiene ningún jugador asignado.");
+								
+								espacioGuardado = 0;
+								
+							}
 						}
 						
 					break;
@@ -280,12 +212,9 @@ public class GestoraPrincipal {
 
 						do {
 							
-							//Nos aseguramos de que las partidas están actualizadas en el array
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a borrar: \n");
-							
-							//y aquí las mostramos por pantalla.
 							GestoraFichero.pintarPartidasGuardadas(partidas);
 							
 							try {
@@ -299,7 +228,6 @@ public class GestoraPrincipal {
 						if (espacioGuardado != 0) {
 							
 							do {
-								//borrar jugador
 								System.out.println("Estás seguro de querer borrar a este jugador? \n"
 										+ "Los cambios serán irreversibles. (S/N)");
 								
@@ -310,7 +238,6 @@ public class GestoraPrincipal {
 							if (confirmacionBorrado == 'S') {
 
 								jugadorActual.reiniciarJugador();
-
 								GestoraFichero.guardarJugadorEnPosicion(jugadorActual, espacioGuardado);
 								
 							}
@@ -322,12 +249,9 @@ public class GestoraPrincipal {
 						
 						do {
 							
-							//Nos aseguramos de que las partidas están actualizadas en el array
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a copiar: \n");
-							
-							//y aquí las mostramos por pantalla.
 							GestoraFichero.pintarPartidasGuardadas(partidas);
 							
 							try {
@@ -342,12 +266,9 @@ public class GestoraPrincipal {
 							
 							do {
 								
-								//Nos aseguramos de que las partidas están actualizadas en el array
 								GestoraFichero.guardarPartidasEnArray(partidas);
 								
 								System.out.println("Elige partida a sobreescribir: \n");
-								
-								//y aquí las mostramos por pantalla.
 								GestoraFichero.pintarPartidasGuardadas(partidas);
 								
 								try {
@@ -365,12 +286,10 @@ public class GestoraPrincipal {
 								}
 								else {
 									do {
-										
 										System.out.println("Estás seguro de copiar la partida "+espacioGuardado+"\n"
 												+ "encima de la partida "+espacioSobreescrito+"? el cambio será irreversible. (S/N)");
 										
 										confirmacionSobreescritura = Character.toUpperCase(sc.nextLine().charAt(0));
-										
 									}
 									while (confirmacionSobreescritura != 'S' && confirmacionSobreescritura != 'N');
 									
@@ -394,43 +313,151 @@ public class GestoraPrincipal {
 			if ((opcionMenuPrincipal == 1 && espacioGuardado!= 0 && confirmacionGuardado == 'S')
 				|| (opcionMenuPrincipal == 2 && espacioGuardado!= 0 )){
 				
-				sonido.stop();
+				musicaIntro.stop();
 				
-				//iniciarPartida
+				// Iniciamos la cancion del juego.
+				musicaJuego = GestoraMusica.iniciarMusicaJuego();
 				
-				/*
-				 * inicio
-				 *  mostrarMenuJuegoYObtenerYValidarOpcionJuego
-				 *  si (opcionJuego != -1)
-				 *  	segun (opcionJuego)
-				 *  		caso 0: jugarTutorial
-				 *  		caso 1: jugarMazmorra1
-				 *  		caso 2: jugarMazmorra2
-				 *  		caso 3: jugarMazmorra3
-				 *  		caso 4: jugarMazmorra4
-				 *  		caso 5: jugarMazmorra5
-				 *  		caso 6: jugarMazmorra6
-				 *  		caso 7: jugarMazmorra7
-				 *  		caso 8: jugarMazmorra8
-				 *  		caso 9: jugarMazmorra9
-				 *  	fin segun
-				 *  	guardarPartida
-				 *  fin si
-				 * fin
-				 * 
-				 */
-				System.out.println("Inicio de partida en construcción.");
-
+				do {
+					do {
+						
+						UtilJuego.limpiarPantalla(10);
+						pintarMenuJuego();
+						opcionMenuJuego = Character.toUpperCase(sc.nextLine().charAt(0));
+						
+					}
+					while (opcionMenuJuego != 'S' && opcionMenuJuego != 'E' && opcionMenuJuego != 'T' && opcionMenuJuego != '0' &&
+							opcionMenuJuego != '1' && opcionMenuJuego != '2' && opcionMenuJuego != '3' && opcionMenuJuego != '4' &&
+							opcionMenuJuego != '5' && opcionMenuJuego != '6' && opcionMenuJuego != '7' && opcionMenuJuego != '8' &&
+							opcionMenuJuego != '9' );
+					
+					if (opcionMenuJuego != 'S') {
+						
+						switch (opcionMenuJuego) {
+						
+							case 'E':
+								
+								UtilJuego.limpiarPantalla(10);
+								jugadorActual.pintarEstadisticas();
+								
+							break;
+							
+							case 'T':
+							
+								System.out.println("En construccion.");
+								
+							break;
+							
+							case '0':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '1':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '2':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '3':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '4':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '5':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '6':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '7':
+								
+								System.out.println("En construccion.");
+								
+							break;
+							
+							case '8':
+								
+								System.out.println("En construccion.");
+								
+							break;
+								
+							case '9':
+								
+								System.out.println("En construccion.");
+								
+							break;
+						
+						
+						}
+						
+					}
+				}
+				while (opcionMenuJuego != 'S');
+				
+				musicaJuego.stop();
+				
 			}
 			
 		}
 		while (opcionMenuPrincipal != 0);
 		
 		sc.close();
-		sonido.stop();
+		musicaIntro.close();
 		
 	}
 	
+	
+	/*
+	 * pintarMenuJuego
+	 * 
+	 * este método pinta por pantalla el menú de juego.
+	 * sin entradas / salidas.
+	 * postcondicion: se habrá pintado por pantalla el menú de juego.
+	 * 
+	 */
+	
+	private void pintarMenuJuego() {
+		
+		System.out.println("\t ---- Elige tu opción ----");
+		System.out.println("\t S - Salir");
+		System.out.println("\t E - Mostrar Estadisticas.");
+		System.out.println("\t T - Ir a la tienda.");
+		System.out.println("\t 0 - Jugar tutorial.");
+		System.out.println("\t 1 - Mazmorra 1");
+		System.out.println("\t 2 - Mazmorra 2");
+		System.out.println("\t 3 - Mazmorra 3");
+		System.out.println("\t 4 - Mazmorra 4");
+		System.out.println("\t 5 - Mazmorra 5");
+		System.out.println("\t 6 - Mazmorra 7");
+		System.out.println("\t 7 - Mazmorra 7");
+		System.out.println("\t 8 - Mazmorra 8");
+		System.out.println("\t 9 - Mazmorra 9");
+		System.out.println("\t---- ---- ---- ---- ----");
+		
+		
+	}
+
 	/*
 	 * pintarMenuPrincipal
 	 * 
@@ -475,6 +502,7 @@ public class GestoraPrincipal {
 	
 	public void pintarTitulo() {
 		
+		System.out.println(" ");
 		System.out.println("||====     ||    ||  |\\\\    ||  =======||  ||=======  ========   ========     =====     |\\\\    ||"); UtilJuego.pararTiempo(333); 
 		System.out.println("||    \\\\   ||    ||  ||\\\\   ||         ||  ||            ||      //         //     \\\\   ||\\\\   ||"); UtilJuego.pararTiempo(333); 
 		System.out.println("||     ||  ||    ||  || \\\\  ||         ||  ||===         ||     //         ||       ||  || \\\\  ||"); UtilJuego.pararTiempo(333); 

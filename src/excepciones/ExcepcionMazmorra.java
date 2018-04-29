@@ -8,7 +8,7 @@ public class ExcepcionMazmorra extends Exception{
 	 */
 	private static final long serialVersionUID = -7143900404991541606L;
 
-	public void ExcepcionesMazmorra(String s) {
+	public ExcepcionMazmorra(String s) {
 		System.out.println(s);
 	}
 
