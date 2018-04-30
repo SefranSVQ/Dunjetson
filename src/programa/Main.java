@@ -21,8 +21,8 @@
  * Una vez completada la introducción, se le permitirá al usuario iniciar el tutorial, 
  * 	donde se le mostrarán las bases para jugar.
  * 
- * Después de completar el tutorial, tendrá acceso al menú de selección de mazmorras. Cada
- * 	vez que complete una mazmorra, tendrá acceso a las mazmorras ya completadas y 
+ * Después de completar el tutorial, tendrá acceso al resto del menú de selección de mazmorras. 
+ * Cada vez que complete una mazmorra, tendrá acceso a las mazmorras ya completadas y 
  * 	a la siguiente.
  * 
  * En cada mazmorra, el jugador se enfrentará a distintos eventos, los cuales tendrá 
@@ -31,7 +31,7 @@
  *  para superar un puzzle, su inteligenci, para superar una trampa, su agilidad, etc.
  *  
  * Si el jugador no supera alguna sala de alguna mazmorra, volverá al menú de mazmorras,
- * 	salvaguardando todo aquello que haya conseguido en sus aventuras anteriores.
+ * 	salvaguardando todo aquello que haya conseguido en sus aventuras.
  * 
  * Cada vez que el jugador acabe/muera en una mazmorra, se guardará su progreso en 
  * 	un fichero externo. Cuando un usuario quiera continuar la aventura por donde 
@@ -120,54 +120,88 @@
  *  mostrarMenuJuegoYObtenerYValidarOpcionMenuJuego
  *  si (opcionMenuJuego != 'S')
  *  	segun (opcionMenuJuego)
- *  		caso 'E': mostrarEstadisticasJugador
- *  		caso 'T': mostrarTienda
- *  		caso '0': jugarTutorial
- *  		caso '1': jugarMazmorra1
- *  		caso '2': jugarMazmorra2
- *  		caso '3': jugarMazmorra3
- *  		caso '4': jugarMazmorra4
- *  		caso '5': jugarMazmorra5
- *  		caso '6': jugarMazmorra6
- *  		caso '7': jugarMazmorra7
- *  		caso '8': jugarMazmorra8
- *  		caso '9': jugarMazmorra9
+ *  		caso 1: mostrarEstadisticasJugador
+ *  		caso 2: Tienda
+ *  		caso 3: MenuMazmorras
  *  	fin segun
- *  	guardarPartida
  *  fin si
  * fin
  * 
- *
- * 
- * // jugarTutorial
+ * // Tienda
  * 
  * inicio
- * 	mostrarMensajeIntroductorio
- * 	EventoMonstruoTutorial
- * 	EventoTrampaTutorial
- * 	EventoDialogoTutorial
+ * 	mostrarMenuTiendaYObtenerYValidarOpcionTienda
+ * 	si (opcionTienda != 0)
+ * 		confirmarOpcionTienda
+ * 		si (confirmacionTienda = 'S')
+ * 			segun (opcionTienda)
+ * 				caso 1: cambiarOroPorFuerza
+ * 				caso 2: cambiarOroPorInteligencia
+ * 				caso 3: cambiarOroPorAgilidad
+ * 			fin segun
+ * 			mostrarEstadisticasJugador
+ * 			guardarPartida
+ * 		fin si
+ * 	fin si
  * fin
  * 
- * //JugarMazmorra1	
+ * //MenuMazmorras
  * 
  * inicio
- * 	para (i = 1 ; mientras i <= longitudMazmorra && vidasJugador > 0 ; i++) 
- * 		generarAleatorio
- * 		si (i < longitudMazmorra )
- * 			segun (aleatorio)
- * 				caso 1: generarEventoMonstruoAleatorioMazmorra1
- * 				caso 2: generarEventoTrampaAleatorioMazmorra1
- * 				caso 3: generarEventoDialogoAleatorioMazmorra1
+ * 	repetir
+ * 		mostrarMenuMazmorraYObtenerYValidarOpcionMazmorra
+ * 		si (opcionMazmorra != 0)
+ * 			segun (opcionMazmorra)
+ * 				caso -1: jugarTutorial
+ * 				cualquierOtroCaso: jugarMazmorraSeleccionada
  * 			fin segun
- * 		sino
- * 			generarEventoJefeMazmorra1
+ * 			guardarPartida
  * 		fin si
- * 		si (vidasJugador > 0)
- * 			elegirSiguienteSala
- * 		sino
- * 			mostrarMensajeDerrota
- * 		fin si
- *  fin para
+ * 	mientras (opcionMazmorra != -1)
+ * fin
+ * 
+ * //jugarTutorial
+ * 
+ * inicio
+ * 	realizarEventoMonstruoTutorial
+ * 	realizarEventoPuzzleTutorial
+ * 	realizarEventoTrampaTutorial
+ * 	realizarEventoJefeTutorial
+ * fin
+ * 
+ * //JugarMazmorraSeleccionada
+ * 
+ * inicio
+ * 	si (mazmorraSeleccionada <= mazmorrasCompletadasJugador)
+ * 		para (i = 0 ; mientras i < longitudMazmorra && jugadorVivo ; i++) 
+ * 			si (i < longitudMazmorra-1 )
+ * 				generarAleatorio
+ * 				realizarEventoDeMazmorraSeleccionadaAleatorio
+ * 				si (!jugadorVivo)
+ * 					indicarJugadorMuerto
+ * 				sino
+ * 					generarRecompensaOroYEstadistica
+ * 				fin si
+ * 			sino
+ * 				generarEventosJefeDeMazmorraSeleccionada
+ * 				si (!jugadorVivo)
+ * 					indicarJugadorMuerto
+ * 				sino
+ * 					generarRecompensaOro
+ * 				fin si
+ * 			fin si
+ * 			si (!jugadorVivo)
+ * 				mostrarMensajeDerrota
+ * 			sino si (no es la última sala)
+ * 				elegirSiguienteSala
+ * 				sino si (mazmorraSeleccionada == mazmorrasDesbloqueadas)
+ * 					incrementarNumeroMazmorrasCompletadas
+ * 				fin si
+ * 			fin si
+ *  	fin para
+ *  sino
+ *  	mostrarMensajeMazmorraNoAlcanzada
+ *  fin si
  * fin
  * 
  * 

@@ -1,5 +1,5 @@
 Salir.
-Sefran,MAGO,3,5,3,10,0
+Sefran,LADRON,3,3,5,10,0
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
