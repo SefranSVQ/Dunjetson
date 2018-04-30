@@ -114,7 +114,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getFuerza()+(this.getFuerza()*nivel/25));
+		dificultad = (int) (this.getFuerza()+(this.getFuerza()*nivel/12));
 		
 		return dificultad;
 		
@@ -138,7 +138,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getInteligencia()+(this.getInteligencia()*nivel/25));
+		dificultad = (int) (this.getInteligencia()+(this.getInteligencia()*nivel/12));
 		
 		return dificultad;
 		
@@ -162,7 +162,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getAgilidad()+(this.getAgilidad()*nivel/25));
+		dificultad = (int) (this.getAgilidad()+(this.getAgilidad()*nivel/12));
 		
 		return dificultad;
 		
@@ -187,7 +187,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getDestreza()+(this.getDestreza()*nivel/25));
+		dificultad = (int) (this.getDestreza()+(this.getDestreza()*nivel/12));
 		
 		return dificultad;
 		
@@ -211,7 +211,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		int recompensa;
 		Random rm = new Random();
 		
-		recompensa = (int) (this.getDestreza()+rm.nextInt(this.getDestreza()*nivel)/20);
+		recompensa = (int) (this.getDestreza()+rm.nextInt(this.getDestreza()*nivel)/25);
 		
 		return recompensa;
 		

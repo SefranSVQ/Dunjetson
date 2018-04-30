@@ -126,19 +126,18 @@ public class GestoraCombate {
 				
 				case 'a': 
 					
-					if (jefe.getAgilidad() < jug.getAgilidad()) vence = 1;
-					else if (rm.nextInt(jefe.getAgilidad()) < jug.getAgilidad()) vence = 0;
+					if (jefe.calcularDificultadAgilidad(nivel) < jug.getAgilidad()) vence = 1;
+					else if (rm.nextInt(jefe.calcularDificultadAgilidad(nivel) ) < jug.getAgilidad()) vence = 0;
 					
 				break;
 				
 				case 'd': 
 					
-					if (jefe.getDestreza() < jug.getDestreza()) vence = 1;
+					if (jefe.calcularDificultad(nivel)  < jug.getDestreza()) vence = 1;
 					
 				break;
 			
 			}
-			if (jefe.getDestreza() < jug.getDestreza()) vence = 1;
 			
 		}
 		

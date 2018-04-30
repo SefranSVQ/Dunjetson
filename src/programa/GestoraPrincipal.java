@@ -87,9 +87,9 @@ public class GestoraPrincipal {
 		
 		mazmorras[1] = new Mazmorra("Era Prehistorica", 10, new Evento[]{
 				new Jefe("T-Rex",15,20,12,16),
-				new Monstruo("Bearusaurus", 12),
-				new Puzzle("Pintada en pared", 14),
-				new Trampa("Planta carnívora gigante", 13)
+				new Monstruo("Bearusaurus", 6),
+				new Puzzle("Pintada en pared", 6),
+				new Trampa("Planta carnívora gigante", 6)
 				}	
 		);
 		
@@ -232,7 +232,7 @@ public class GestoraPrincipal {
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige espacio donde guardar: \n");
-							GestoraFichero.pintarPartidasGuardadas(partidas);
+							GestoraFichero.pintarPartidasGuardadas();
 							
 							try {
 								espacioGuardado = Integer.parseInt(sc.nextLine());
@@ -270,7 +270,7 @@ public class GestoraPrincipal {
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a cargar: \n");
-							GestoraFichero.pintarPartidasGuardadas(partidas);
+							GestoraFichero.pintarPartidasGuardadas();
 							
 							try {
 								espacioGuardado = Integer.parseInt(sc.nextLine());
@@ -302,7 +302,7 @@ public class GestoraPrincipal {
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a borrar: \n");
-							GestoraFichero.pintarPartidasGuardadas(partidas);
+							GestoraFichero.pintarPartidasGuardadas();
 							
 							try {
 								espacioGuardado = Integer.parseInt(sc.nextLine());
@@ -339,7 +339,7 @@ public class GestoraPrincipal {
 							GestoraFichero.guardarPartidasEnArray(partidas);
 							
 							System.out.println("Elige partida a copiar: \n");
-							GestoraFichero.pintarPartidasGuardadas(partidas);
+							GestoraFichero.pintarPartidasGuardadas();
 							
 							try {
 								espacioGuardado = Integer.parseInt(sc.nextLine());
@@ -356,7 +356,7 @@ public class GestoraPrincipal {
 								GestoraFichero.guardarPartidasEnArray(partidas);
 								
 								System.out.println("Elige partida a sobreescribir: \n");
-								GestoraFichero.pintarPartidasGuardadas(partidas);
+								GestoraFichero.pintarPartidasGuardadas();
 								
 								try {
 									espacioSobreescrito = Integer.parseInt(sc.nextLine());
@@ -427,111 +427,116 @@ public class GestoraPrincipal {
 								UtilJuego.limpiarPantalla(10);
 								jugadorActual.pintarEstadisticas();
 								
+								System.out.println("Pulsa intro para continuar.");
+								sc.nextLine();
+								
 							break;
 								
 							case 2: // Tienda
-								
 								do {
-									
-									pintarMenuTienda();
-									
-									try {
-										opcionTienda = Integer.parseInt(sc.nextLine());
-									}
-									catch (Exception e) { opcionTienda = -1; }
-									
-								}
-								while (opcionTienda < 0 || opcionTienda > 3);
-								
-								if (opcionTienda != 0) {
-									
 									do {
 										
-										pintarConfirmacionTienda(jugadorActual, opcionTienda);
+										pintarMenuTienda();
 										
-										confirmacionTienda = Character.toUpperCase(sc.nextLine().charAt(0));
+										try {
+											opcionTienda = Integer.parseInt(sc.nextLine());
+										}
+										catch (Exception e) { opcionTienda = -1; }
 										
 									}
-									while (confirmacionTienda != 'S' && confirmacionTienda != 'N');
+									while (opcionTienda < 0 || opcionTienda > 3);
 									
-									if (confirmacionTienda == 'S') {
-										switch (jugadorActual.getClase()) {
+									if (opcionTienda != 0) {
 										
-											case GUERRERO:
-												switch(opcionTienda) {
-													case 1: 
-														jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5*2); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 2: 
-														jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 3: 
-														jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-												}
-											break;
+										do {
 											
-											case MAGO:
-												switch(opcionTienda) {
-													case 1: 
-														jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 2: 
-														jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5*2); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 3: 
-														jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-												}
-											break;
-												
-											case LADRON:
-												switch(opcionTienda) {
-													case 1: 
-														jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 2: 
-														jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 3: 
-														jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5*2); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-												}
-											break;
-												
-											case COMERCIANTE:
-												switch(opcionTienda) {
-													case 1: 
-														jugadorActual.modificarFuerza((int)jugadorActual.getOro()/4); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 2: 
-														jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/4); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-													case 3: 
-														jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/4); 
-														try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
-													break;
-												}
-											break;
+											pintarConfirmacionTienda(jugadorActual, opcionTienda);
 											
-											default: break;
+											confirmacionTienda = Character.toUpperCase(sc.nextLine().charAt(0));
+											
 										}
-										UtilJuego.limpiarPantalla(10);
-										jugadorActual.pintarEstadisticas();
-										GestoraFichero.guardarJugadorEnPosicion(jugadorActual, espacioGuardado);
+										while (confirmacionTienda != 'S' && confirmacionTienda != 'N');
+										
+										if (confirmacionTienda == 'S') {
+											switch (jugadorActual.getClase()) {
+											
+												case GUERRERO:
+													switch(opcionTienda) {
+														case 1: 
+															jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5*2); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 2: 
+															jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 3: 
+															jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+													}
+												break;
+												
+												case MAGO:
+													switch(opcionTienda) {
+														case 1: 
+															jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 2: 
+															jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5*2); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 3: 
+															jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+													}
+												break;
+													
+												case LADRON:
+													switch(opcionTienda) {
+														case 1: 
+															jugadorActual.modificarFuerza((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 2: 
+															jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/5); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 3: 
+															jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/5*2); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+													}
+												break;
+													
+												case COMERCIANTE:
+													switch(opcionTienda) {
+														case 1: 
+															jugadorActual.modificarFuerza((int)jugadorActual.getOro()/3); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 2: 
+															jugadorActual.modificarInteligencia((int)jugadorActual.getOro()/3); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+														case 3: 
+															jugadorActual.modificarAgilidad((int)jugadorActual.getOro()/3); 
+															try {jugadorActual.setOro(0); } catch (ExcepcionJugador e) {}
+														break;
+													}
+												break;
+												
+												default: break;
+											}
+											UtilJuego.limpiarPantalla(10);
+											jugadorActual.pintarEstadisticas();
+											GestoraFichero.guardarJugadorEnPosicion(jugadorActual, espacioGuardado);
+										}
 									}
 								}
+								while(opcionTienda != 0);
 							break;
 								
 							case 3: // Menu de Mazmorras
@@ -605,7 +610,8 @@ public class GestoraPrincipal {
 												
 												
 												System.out.println("Tutorial completado. Ahora puedes acceder a la mazmorra 1!");
-												
+												System.out.println("\nPulsa intro para continuar.");
+												sc.nextLine();
 												try {
 													jugadorActual.setMazmorrasCompletadas(1);
 												} catch (ExcepcionJugador e) {}
@@ -615,10 +621,14 @@ public class GestoraPrincipal {
 
 												if (opcionMazmorra <= jugadorActual.getMazmorrasCompletadas()) {
 												
+													UtilJuego.limpiarPantalla(5);
 													System.out.println("Comenzando mazmorra: "+mazmorras[opcionMazmorra].getNombre());
 													jugadorVivo = true;
 													
 													for (int i = 0 ; i < mazmorras[opcionMazmorra].getTotalNiveles() && jugadorVivo ; i++) {
+														
+														UtilJuego.limpiarPantalla(3);
+														System.out.println("Nivel "+(i+1)+"/"+mazmorras[opcionMazmorra].getTotalNiveles());
 														
 														if (i < mazmorras[opcionMazmorra].getTotalNiveles()-1) {
 															
@@ -724,7 +734,12 @@ public class GestoraPrincipal {
 																try {
 																	jugadorActual.setMazmorrasCompletadas(opcionMazmorra+1);
 																} catch (ExcepcionJugador e) {}
-																System.out.println("Mazmorra " +(opcionMazmorra+1)+  " desbloqueada.");
+																if (opcionMazmorra != 9) {
+																	System.out.println("Mazmorra " +(opcionMazmorra+1)+  " desbloqueada.");
+																	System.out.println("Pulsa intro para continuar.");
+																	sc.nextLine();
+																
+																}
 															}
 													}
 												}
@@ -814,10 +829,12 @@ public class GestoraPrincipal {
 				System.out.println("1. Arriba");
 				System.out.println("2. Derecha");
 				
-				salida = sc.nextInt();
+					try {
+						salida = Integer.parseInt(sc.nextLine());
+					}
+					catch (Exception e) {salida = -1;}
 					if (salida <1 || salida>2) {
 						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-						salida = sc.nextInt();
 					}
 				} while (salida <1 || salida>2);
 				
@@ -851,10 +868,12 @@ public class GestoraPrincipal {
 				System.out.println("1. Arriba");
 				System.out.println("2. Izquierda");
 				
-				salida = sc.nextInt();
+					try {
+						salida = Integer.parseInt(sc.nextLine());
+					}
+					catch (Exception e) {salida = -1;}
 					if (salida <1 || salida>2) {
 						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-						salida = sc.nextInt();
 					}
 				} while (salida <1 || salida>2);
 				
@@ -885,10 +904,12 @@ public class GestoraPrincipal {
 				System.out.println("1. Izquierda.");
 				System.out.println("2. Derecha");
 				
-				salida = sc.nextInt();
+					try {
+						salida = Integer.parseInt(sc.nextLine());
+					}
+					catch (Exception e) {salida = -1;}
 					if (salida <1 || salida>2) {
 						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-						salida = sc.nextInt();
 					}
 				} while (salida <1 || salida>2);
 			break;
@@ -920,10 +941,12 @@ public class GestoraPrincipal {
 				System.out.println("2. Derecha");
 				System.out.println("3. Izquierda");
 				
-				salida = sc.nextInt();
+					try {
+						salida = Integer.parseInt(sc.nextLine());
+					}
+					catch (Exception e) {salida = -1;}
 					if (salida <1 || salida>3) {
 						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-						salida = sc.nextInt();
 					}
 				} while (salida <1 || salida>3);
 			break;
@@ -1111,7 +1134,7 @@ public class GestoraPrincipal {
 		System.out.println("\t  	     /     \\ /     \\");
 		System.out.println("\t  	,   |       '       |");
 		System.out.println("\t  	I __L________       L__");
-		System.out.println("\t O====IE__________/     ./___>");
+		System.out.println("\t   O====IE__________/     ./___>");
 		System.out.println("\t  	I      \\.       ./");
 		System.out.println("\t  `	        \\.   ./");
 		System.out.println("\t  	           \\ /");

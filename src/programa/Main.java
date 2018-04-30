@@ -130,19 +130,21 @@
  * // Tienda
  * 
  * inicio
- * 	mostrarMenuTiendaYObtenerYValidarOpcionTienda
- * 	si (opcionTienda != 0)
- * 		confirmarOpcionTienda
- * 		si (confirmacionTienda = 'S')
- * 			segun (opcionTienda)
- * 				caso 1: cambiarOroPorFuerza
- * 				caso 2: cambiarOroPorInteligencia
- * 				caso 3: cambiarOroPorAgilidad
- * 			fin segun
- * 			mostrarEstadisticasJugador
- * 			guardarPartida
+ * 	repetir
+ * 		mostrarMenuTiendaYObtenerYValidarOpcionTienda
+ * 		si (opcionTienda != 0)
+ * 			confirmarOpcionTienda
+ * 			si (confirmacionTienda = 'S')
+ * 				segun (opcionTienda)
+ * 					caso 1: cambiarOroPorFuerza
+ * 					caso 2: cambiarOroPorInteligencia
+ * 					caso 3: cambiarOroPorAgilidad
+ * 				fin segun
+ * 				mostrarEstadisticasJugador
+ * 				guardarPartida
+ * 			fin si
  * 		fin si
- * 	fin si
+ *	mientras (opcionTienda != 0)
  * fin
  * 
  * //MenuMazmorras
@@ -194,7 +196,7 @@
  * 				mostrarMensajeDerrota
  * 			sino si (no es la última sala)
  * 				elegirSiguienteSala
- * 				sino si (mazmorraSeleccionada == mazmorrasDesbloqueadas)
+ * 				sino si (mazmorraSeleccionada == mazmorrasDesbloqueadas )
  * 					incrementarNumeroMazmorrasCompletadas
  * 				fin si
  * 			fin si

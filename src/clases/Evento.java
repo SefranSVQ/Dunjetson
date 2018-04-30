@@ -96,7 +96,7 @@ public abstract class Evento {
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getDificultadBase()+(this.getDificultadBase()*nivel/25));
+		dificultad = (int) (this.getDificultadBase()+(this.getDificultadBase()*nivel/12));
 		
 		return dificultad;
 		

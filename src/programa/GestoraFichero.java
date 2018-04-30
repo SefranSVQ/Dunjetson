@@ -97,24 +97,25 @@ public class GestoraFichero {
 	 * pintarPartidasGuardadas
 	 * 
 	 * Este método pintará por pantallas las partidas 
-	 * guardadas en el array.
+	 * guardadas en el fichero save.txt.
 	 * 
-	 * Precondiciones: el array debe tener una longitud de 5
-	 * Entradas: partidas (String[])
+	 * Entradas: nada
 	 * Salidas: nada
 	 * E/S: nada
 	 * 
 	 */
 	
-	public static void pintarPartidasGuardadas(String[] partidas) {
+	public static void pintarPartidasGuardadas() {
 		
-		System.out.println("\t ---- Partidas guardadas ----: ");
-		System.out.println("\t Att: Nick, Clase, Pod, Int, Agi, Oro, MazCompletadas");
-		System.out.println("\t 0 - "+partidas[0]);
-		System.out.println("\t 1 - "+partidas[1]);
-		System.out.println("\t 2 - "+partidas[2]);
-		System.out.println("\t 3 - "+partidas[3]);
-		System.out.println("\t 4 - "+partidas[4]);
+		Jugador j = null;
+		
+		System.out.println("\t0 - Salir\n");
+		for(int i = 1 ; i < 5 ; i++) {
+			System.out.println("\t"+i+" - Partida "+i);
+			j = cargarJugador(i);
+			j.pintarEstadisticas();
+		}
+		
 		
 	}
 	

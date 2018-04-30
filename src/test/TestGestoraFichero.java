@@ -17,13 +17,13 @@ public class TestGestoraFichero {
 		System.out.println("Partidas reiniciadas en el fichero save.txt");
 		
 		GestoraFichero.guardarPartidasEnArray(partidas);
-		GestoraFichero.pintarPartidasGuardadas(partidas);
+		GestoraFichero.pintarPartidasGuardadas();
 		
 		GestoraFichero.guardarJugadorEnPosicion(jugador, posicion);
 		System.out.println("Partida en la posicion 1 modificada");
 		
 		GestoraFichero.guardarPartidasEnArray(partidas);
-		GestoraFichero.pintarPartidasGuardadas(partidas);
+		GestoraFichero.pintarPartidasGuardadas();
 		
 		jugador2 = GestoraFichero.cargarJugador(1);
 		
