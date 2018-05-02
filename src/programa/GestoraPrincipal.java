@@ -617,7 +617,7 @@ public class GestoraPrincipal {
 												} catch (ExcepcionJugador e) {}
 												
 											break;
-											default:
+											default: // jugarMazmorraSeleccionada
 
 												if (opcionMazmorra <= jugadorActual.getMazmorrasCompletadas()) {
 												

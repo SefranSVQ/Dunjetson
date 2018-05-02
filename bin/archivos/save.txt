@@ -1,5 +1,5 @@
 Salir.
-Sefran,COMERCIANTE,9,3,3,0,0
+sefrylan,LADRON,3,6,9,4,1
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
