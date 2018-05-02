@@ -1,5 +1,5 @@
 Salir.
-Sefran,COMERCIANTE,9,3,3,0,0
+Sefran,MAGO,3,9,5,2,1
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
 Heroe,NINGUNA,1,1,1,0,0
