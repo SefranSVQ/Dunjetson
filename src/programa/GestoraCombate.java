@@ -95,15 +95,15 @@ public class GestoraCombate {
 		
 		if (e instanceof Monstruo) {
 			if (e.calcularDificultad(nivel) < jug.getFuerza()) vence = 1;
-			else if (rm.nextInt(e.calcularDificultad(nivel)) < jug.getFuerza()) vence = 0;
+			else if (rm.nextInt(e.calcularDificultad(nivel)+1) < jug.getFuerza()) vence = 0;
 		}
 		else if (e instanceof Puzzle) {
 			if (e.calcularDificultad(nivel) < jug.getInteligencia()) vence = 1;
-			else if (rm.nextInt(e.calcularDificultad(nivel)) < jug.getInteligencia()) vence = 0;
+			else if (rm.nextInt(e.calcularDificultad(nivel)+1) < jug.getInteligencia()) vence = 0;
 		} 
 		else if (e instanceof Trampa) {
 			if (e.calcularDificultad(nivel) < jug.getAgilidad()) vence = 1;
-			else if (rm.nextInt(e.calcularDificultad(nivel)) < jug.getAgilidad()) vence = 0;
+			else if (rm.nextInt(e.calcularDificultad(nivel)+1) < jug.getAgilidad()) vence = 0;
 		}
 		else {
 			jefe = (Jefe) e;
@@ -113,21 +113,21 @@ public class GestoraCombate {
 				case 'f': 
 					
 					if (jefe.calcularDificultadFuerza(nivel) < jug.getFuerza()) vence = 1;
-					else if (rm.nextInt(jefe.calcularDificultadFuerza(nivel)) < jug.getFuerza()) vence = 0;
+					else if (rm.nextInt(jefe.calcularDificultadFuerza(nivel)+1) < jug.getFuerza()) vence = 0;
 					
 				break;
 				
 				case 'i': 
 					
 					if (jefe.calcularDificultadInteligencia(nivel) < jug.getInteligencia()) vence = 1;
-					else if (rm.nextInt(jefe.calcularDificultadInteligencia(nivel)) < jug.getInteligencia()) vence = 0;
+					else if (rm.nextInt(jefe.calcularDificultadInteligencia(nivel)+1) < jug.getInteligencia()) vence = 0;
 					
 				break;
 				
 				case 'a': 
 					
 					if (jefe.calcularDificultadAgilidad(nivel) < jug.getAgilidad()) vence = 1;
-					else if (rm.nextInt(jefe.calcularDificultadAgilidad(nivel) ) < jug.getAgilidad()) vence = 0;
+					else if (rm.nextInt(jefe.calcularDificultadAgilidad(nivel)+1) < jug.getAgilidad()) vence = 0;
 					
 				break;
 				

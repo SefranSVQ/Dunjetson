@@ -31,10 +31,11 @@ public class GestoraPrincipal {
 		int opcionMenuJuego = 0;
 		int opcionTienda = 0;
 		int opcionMazmorra = 0;
-		char confirmacionJugador = 'S';
-		char confirmacionGuardado = 'S';
-		char confirmacionBorrado = 'S';
-		char confirmacionSobreescritura = 'S';
+		int opcionSala = 0;
+		char confirmacionJugador = ' ';
+		char confirmacionGuardado = ' ';
+		char confirmacionBorrado = ' ';
+		char confirmacionSobreescritura = ' ';
 		char confirmacionTienda = ' ';
 		int espacioGuardado = 0;
 		int espacioSobreescrito = 0 ;
@@ -65,13 +66,13 @@ public class GestoraPrincipal {
 		int siguienteEvento = 0;
 		int recompensaOro = 0;
 		int recompensaEstadistica = 0;
+		int salaPintada = 0;
 			
 		// Mazmorras
 			
 			/* 
 			 * Notas:
 			 * Los jefes siempre están en la posición 0 de eventos.
-			 * En el evento de la posición 1 debe haber un monstruo.
 			 * 
 			 */
 		
@@ -632,14 +633,19 @@ public class GestoraPrincipal {
 														
 														if (i < mazmorras[opcionMazmorra].getTotalNiveles()-1) {
 															
+															// Evento aleatorio
 															siguienteEvento = rng.nextInt(mazmorras[opcionMazmorra].getEventos().length-1);
 															
 															gc.pintarEnfrentamiento(jugadorActual, mazmorras[opcionMazmorra].getEventos()[siguienteEvento+1], i);
 															victoria = gc.calcularVictoria(jugadorActual, mazmorras[opcionMazmorra].getEventos()[siguienteEvento+1], i, 'n');
 															gc.pintarResultadoCombate(victoria);
 															
-															if (victoria == -1) jugadorVivo = false;
-															else { //GenerarRecompensas
+															if (victoria == -1) { // -1 => jugador derrotado.
+																jugadorVivo = false;
+																System.out.println("Has sido derrotado. Hazte más fuerte "
+																		+ "en la tienda mágica para avanzar más lejos.");
+															}
+															else { 
 																
 																recompensaOro = mazmorras[opcionMazmorra].getEventos()[siguienteEvento+1].calcularRecompensa(i);
 																
@@ -671,7 +677,30 @@ public class GestoraPrincipal {
 																System.out.println("Pulsa intro para continuar.");
 																sc.nextLine();
 																
+																salaPintada = rng.nextInt(4)+1; 
+																
+																//PintarSalaYObtenerYValidarOpcionSala
+																do {
+																	
+																	pintarSala(salaPintada);
+																	pintarOpcionesSala(salaPintada);
+																	
+																	try {
+																		opcionSala = Integer.parseInt(sc.nextLine());
+																	}
+																	catch (Exception e) { opcionSala = -1; }
+																	if ((salaPintada >= 1 && salaPintada <=3) && (opcionSala < 1 || opcionSala > 2)
+																			|| (salaPintada == 4 && (opcionSala < 1 || opcionSala > 3))) {
+																		System.out.println(jugadorActual.getNick()+", quieres comerte una pared, verdad? :)");
+																	}
+																		
+																	
+																}
+																while ((salaPintada >= 1 && salaPintada <=3) && (opcionSala < 1 || opcionSala > 2)
+																		|| (salaPintada == 4 && (opcionSala < 1 || opcionSala > 3)));
+																
 															}
+															
 														}	
 														else {	//Jefe de mazmorra
 															
@@ -706,42 +735,47 @@ public class GestoraPrincipal {
 																
 															}
 															
-															if (victoria == -1) jugadorVivo = false;
+															if (victoria == -1) {
+																jugadorVivo = false;
+																System.out.println("Has sido derrotado. Hazte más fuerte "
+																		+ "en la tienda mágica para avanzar más lejos.");
+															}
 															else {
 																jefeActual = (Jefe)(mazmorras[opcionMazmorra].getEventos()[0]);
-																recompensaOro = jefeActual.calcularRecompensa(i);
+																
+																if (jugadorActual.getClase() == Clase.COMERCIANTE) {
+																	recompensaOro = (int)(jefeActual.calcularRecompensa(i)*1.5);
+																}
+																else {
+																	recompensaOro = (int)(jefeActual.calcularRecompensa(i));
+																}
+																
 																System.out.println("Has ganado "+recompensaOro+" de oro");
+																
 																try {
 																	jugadorActual.modificarOro(recompensaOro);
 																} catch (ExcepcionJugador e) {}
-															}
-															
-														}
-														
-														if (!jugadorVivo) {
-															
-															System.out.println("Has sido derrotado. Hazte más fuerte "
-																	+ "en la tienda mágica para avanzar más lejos.");
-															
-														}
-														else if (i != mazmorras[opcionMazmorra].getTotalNiveles()-1){
-															
-															//elegirSala
-															generarImagenNivel(jugadorActual.getNick());
-															
-															}
-															else if (opcionMazmorra == jugadorActual.getMazmorrasCompletadas()){
 																try {
 																	jugadorActual.setMazmorrasCompletadas(opcionMazmorra+1);
 																} catch (ExcepcionJugador e) {}
-																if (opcionMazmorra != 9) {
+																if (opcionMazmorra != 9 && opcionMazmorra < jugadorActual.getMazmorrasCompletadas()) {
 																	System.out.println("Mazmorra " +(opcionMazmorra+1)+  " desbloqueada.");
-																	System.out.println("Pulsa intro para continuar.");
-																	sc.nextLine();
+																	
 																
 																}
+																else if (opcionMazmorra == 9){
+																	//Pintar creditos
+																	System.out.println("Creditos en construcción.");
+																}
+																
+																System.out.println("Pulsa intro para continuar.");
+																sc.nextLine();
 															}
-													}
+
+														}
+														
+													}	
+													
 												}
 												else {
 													System.out.println("Aun no has desbloqueado esa mazmorra.");
@@ -765,7 +799,7 @@ public class GestoraPrincipal {
 				while (opcionMenuJuego != 0);
 				
 				musicaJuego.stop();
-				
+		
 			}
 			
 		}
@@ -776,35 +810,66 @@ public class GestoraPrincipal {
 		
 	}
 	
+	/*
+	 * pintarOpcionesSala
+	 * 
+	 * este método pinta por pantalla las opciones
+	 * de salida en las salas de la mazmorra
+	 * 
+	 * precondiciones: la sala pintada tendrá un valor entre 1 y 4
+	 * entradas: salaPintada
+	 * salida: no hay
+	 * e/s: no hay
+	 * postcondiciones:
+	 * 
+	 */
+	
+	public void pintarOpcionesSala(int salaPintada) {
+		System.out.println(" --- Elige Salida --- ");
+		switch (salaPintada)  {
+			
+			case 1:
+				System.out.println("1 - Arriba.");
+				System.out.println("2 - Derecha.");
+			break;
+			
+			case 2:
+				System.out.println("1 - Arriba.");
+				System.out.println("2 - Izquierda.");
+			break;
+				
+			case 3:
+				System.out.println("1 - Derecha.");
+				System.out.println("2 - Izquierda.");
+			break;
+				
+			case 4:
+				System.out.println("1 - Arriba.");
+				System.out.println("2 - Derecha.");
+				System.out.println("3 - Izquierda.");
+			break;
+		
+		}
+	}
+	
 	/* 
-	 * generarImagenNivel
+	 * pintarSala
 	 * 
 	 * este método se encargará de pintar por pantalla la
-	 * habitación que se encontrará el jugador al pasar un evento
-	 * y de la elección de la entrada del valor
-	 * elegido por el jugador para pasar al siguiente nivel.
+	 * habitación que se encontrará el jugador al pasar un evento.
 	 * 
-	 * entradas: el nombre del jugador
+	 * entradas: salaPintada (int)
 	 * salidas: nada
 	 * E/S: nada
-	 * Postcondiciones: el jugador habrá elegido la entrada 
-	 * 	al siguiente nivel.
+	 * Postcondiciones: se habrá pintado por pantalla
 	 */
 	 
-	public static void generarImagenNivel(String nombreJugador) {
-
-		Random random = new Random ();
-		Scanner sc = new Scanner(System.in);
-		int rng = 0;
-		int salida;
-		
-		rng = random.nextInt(4)+1;
+	public static int pintarSala(int salaPintada) {
 		
 		UtilJuego.limpiarPantalla(10);
 		// Imagenes de la sala
-		switch (rng){
+		switch (salaPintada){
 			case 1: 
-				do {
 					
 				System.out.println("\t                               ");
 				System.out.println("\t           |       |           ");
@@ -824,26 +889,11 @@ public class GestoraPrincipal {
 				System.out.println("\t           |   ^   |           ");
 				System.out.println("\t               ^               ");
 				System.out.println("\t                               ");
-				System.out.println("Puedes ver las salidas al siguiente nivel");
-				System.out.println("Donde quieres ir?");
-				System.out.println("1. Arriba");
-				System.out.println("2. Derecha");
 				
-					try {
-						salida = Integer.parseInt(sc.nextLine());
-					}
-					catch (Exception e) {salida = -1;}
-					if (salida <1 || salida>2) {
-						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-					}
-				} while (salida <1 || salida>2);
-				
-				
+
 			break;
 			
 			case 2: 
-				
-				do {
 					
 				System.out.println("\t                               ");
 				System.out.println("\t           |       |           ");
@@ -863,24 +913,10 @@ public class GestoraPrincipal {
 				System.out.println("\t           |   ^   |           ");
 				System.out.println("\t               ^               ");
 				System.out.println("\t ");
-				System.out.println("Puedes ver las salidas al siguiente nivel");
-				System.out.println("Donde quieres ir?");
-				System.out.println("1. Arriba");
-				System.out.println("2. Izquierda");
-				
-					try {
-						salida = Integer.parseInt(sc.nextLine());
-					}
-					catch (Exception e) {salida = -1;}
-					if (salida <1 || salida>2) {
-						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-					}
-				} while (salida <1 || salida>2);
 				
 			break;
 			
 			case 3: 
-				do {
 					
 				System.out.println("\t                               ");
 				System.out.println("\t   -------------------------   ");
@@ -899,23 +935,10 @@ public class GestoraPrincipal {
 				System.out.println("\t           |   ^   |           ");
 				System.out.println("\t               ^               ");
 				System.out.println("\t ");
-				System.out.println("Puedes ver las salidas al siguiente nivel");
-				System.out.println("Donde quieres ir?");
-				System.out.println("1. Izquierda.");
-				System.out.println("2. Derecha");
 				
-					try {
-						salida = Integer.parseInt(sc.nextLine());
-					}
-					catch (Exception e) {salida = -1;}
-					if (salida <1 || salida>2) {
-						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-					}
-				} while (salida <1 || salida>2);
 			break;
 			
 			case 4:
-				do {
 					
 				System.out.println("\t                               ");
 				System.out.println("\t           |       |           ");
@@ -935,24 +958,13 @@ public class GestoraPrincipal {
 				System.out.println("\t           |   ^   |           ");
 				System.out.println("\t               ^               ");
 				System.out.println("\t ");
-				System.out.println("Puedes ver las salidas al siguiente nivel");
-				System.out.println("Donde quieres ir?");
-				System.out.println("1. Arriba");
-				System.out.println("2. Derecha");
-				System.out.println("3. Izquierda");
 				
-					try {
-						salida = Integer.parseInt(sc.nextLine());
-					}
-					catch (Exception e) {salida = -1;}
-					if (salida <1 || salida>3) {
-						System.out.println(nombreJugador+", quieres comerte una pared, verdad? :)");
-					}
-				} while (salida <1 || salida>3);
 			break;
 		}
 		
-		//Fin
+		UtilJuego.limpiarPantalla(3);
+		return salaPintada;
+		
 	}
 	
 	

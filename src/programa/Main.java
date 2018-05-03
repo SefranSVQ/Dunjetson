@@ -176,13 +176,14 @@
  * inicio
  * 	si (mazmorraSeleccionada <= mazmorrasCompletadasJugador)
  * 		para (i = 0 ; mientras i < longitudMazmorra && jugadorVivo ; i++) 
- * 			si (i < longitudMazmorra-1 )
+ * 			si (no es la última sala)
  * 				generarAleatorio
  * 				realizarEventoDeMazmorraSeleccionadaAleatorio
  * 				si (!jugadorVivo)
  * 					indicarJugadorMuerto
  * 				sino
- * 					generarRecompensaOroYEstadistica
+ * 					generarRecompensaOroYEstadisticaYPintarRecompensas
+ * 					PintarSalaYObtenerYValidarOpcionSala
  * 				fin si
  * 			sino
  * 				generarEventosJefeDeMazmorraSeleccionada
@@ -190,14 +191,11 @@
  * 					indicarJugadorMuerto
  * 				sino
  * 					generarRecompensaOro
- * 				fin si
- * 			fin si
- * 			si (!jugadorVivo)
- * 				mostrarMensajeDerrota
- * 			sino si (no es la última sala)
- * 				elegirSiguienteSala
- * 				sino si (mazmorraSeleccionada == mazmorrasDesbloqueadas )
- * 					incrementarNumeroMazmorrasCompletadas
+ * 					si (mazmorraActual != 9 y mazmorraActual < mazmorrasCompletadasPorJugadorActual)
+ * 						incrementarNumeroMazmorrasCompletadas
+ * 					sino si (mazmorraActual == 9)
+ * 						pintarCreditos
+ * 					fin si 
  * 				fin si
  * 			fin si
  *  	fin para

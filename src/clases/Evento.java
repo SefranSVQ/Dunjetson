@@ -69,8 +69,8 @@ public abstract class Evento {
 		
 		int recompensa;
 		
-		if (this.getDificultadBase()/5 == 0) recompensa = 1;
-		else recompensa = this.getDificultadBase()/5;
+		if (this.getDificultadBase()/10 == 0) recompensa = 1;
+		else recompensa = this.getDificultadBase()/10;
 		
 		return recompensa;
 	}
@@ -96,7 +96,7 @@ public abstract class Evento {
 		
 		int dificultad;
 		
-		dificultad = (int) (this.getDificultadBase()+(this.getDificultadBase()*nivel/12));
+		dificultad = (int) (this.getDificultadBase()+(this.getDificultadBase()*nivel/10));
 		
 		return dificultad;
 		
@@ -119,7 +119,7 @@ public abstract class Evento {
 		int recompensa;
 		Random rm = new Random();
 		
-		recompensa = (int) (this.getRecompensaBase()+rm.nextInt(2+(this.getRecompensaBase()*nivel)/25));
+		recompensa = (int) (this.getRecompensaBase()+rm.nextInt((this.getRecompensaBase()*nivel/2)));
 		
 		return recompensa;
 		
