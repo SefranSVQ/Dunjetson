@@ -89,24 +89,30 @@ public class GestoraPrincipal {
 		mazmorras[1] = new Mazmorra("Era Prehistorica", 10, new Evento[]{
 				new Jefe("T-Rex",15,20,12,16),
 				new Monstruo("Bearusaurus", 6),
-				new Puzzle("Pintada en pared", 6),
-				new Trampa("Planta carnívora gigante", 6)
+				new Monstruo("Triceraptor", 5),
+				new Monstruo("Diplodocus", 4),
+				new Puzzle("Pintada en pared", 5),
+				new Puzzle("Pintada en pared", 5),
+				new Trampa("Planta carnívora gigante", 5),
+				new Trampa("Liana atrapa-humanos", 6)
 				}	
 		);
 		
 		mazmorras[2] = new Mazmorra("Barco Pirata", 15, new Evento[]{
-				new Jefe("Capitán",40,38,46,44),
+				new Jefe("Capitán",40,42,58,48),
 				new Monstruo("Bucanero", 32),
 				new Puzzle("Cofre Maldito", 31),
+				new Puzzle("Mapa del tesoro", 31),
 				new Trampa("Red para peces", 30)
 				}	
 		);
 		
-		mazmorras[3] = new Mazmorra("Ciudad de inicio", 3, new Evento[]{
-				new Jefe("Runner",2,1,1,2),
-				new Monstruo("Paloma", 2),
-				new Puzzle("Puzzle de 2 piezas", 2),
-				new Trampa("Cáscara de plátano", 2)
+		mazmorras[3] = new Mazmorra("Antiguo Egipto", 23, new Evento[]{
+				new Jefe("Faraon",186,201,212,152),
+				new Monstruo("Momia", 135),
+				new Puzzle("Jeroglífico", 140),
+				new Puzzle("Jeroglífico", 140),
+				new Trampa("Tormenta de arena", 128)
 				}	
 		);
 		
@@ -200,8 +206,10 @@ public class GestoraPrincipal {
 							do {
 								
 								System.out.println("¿Cómo te llamas? (Máximo 10 caracteres)");
-								nombre = sc.nextLine();
-							
+								try {
+									nombre = sc.nextLine();
+								}
+								catch (Exception e) {nombre = "aaaaaaaaaaaaaaaa";}
 							}
 							while(nombre.length() > 10 || nombre.length() == 0);
 							
@@ -209,7 +217,10 @@ public class GestoraPrincipal {
 								
 								System.out.println("¿Y qué tipo de aventurero eres?\n"
 										+ "(guerrero / mago / ladron / comerciante)");
-								clase = sc.nextLine();
+								try {
+									clase = sc.nextLine();
+								}
+								catch (Exception e) {clase = "-1";}
 							
 							}
 							while(!clase.equals("guerrero") && !clase.equals("mago") && !clase.equals("ladron") && !clase.equals("comerciante"));
@@ -217,8 +228,10 @@ public class GestoraPrincipal {
 							do {
 								System.out.println("Entonces te llamas "+nombre+" y eres un " + clase + "? (S/N) \n"
 										+ "Nota: si no quieres crear un nuevo personaje, pon 'S' y luego podrás deshacerlo.");
-
-								confirmacionJugador =  Character.toUpperCase(sc.nextLine().charAt(0));
+								try {
+									confirmacionJugador =  Character.toUpperCase(sc.nextLine().charAt(0));
+								}
+								catch (Exception e) { confirmacionJugador = 'm';}
 								
 							}
 							while (confirmacionJugador != 'N' && confirmacionJugador != 'S');
@@ -248,7 +261,10 @@ public class GestoraPrincipal {
 							do {
 								System.out.println("¿Seguro que quieres guardarlo en la posición "+espacioGuardado+"? "
 										+ "Los cambios no se podrán deshacer. (S/N)");
-								confirmacionGuardado = Character.toUpperCase(sc.nextLine().charAt(0));
+								try {
+									confirmacionGuardado = Character.toUpperCase(sc.nextLine().charAt(0));
+								}
+								catch (Exception e) {confirmacionGuardado = 'A';}
 							}
 							while (confirmacionGuardado != 'S' && confirmacionGuardado != 'N');
 								
@@ -318,8 +334,10 @@ public class GestoraPrincipal {
 							do {
 								System.out.println("Estás seguro de querer borrar a este jugador? \n"
 										+ "Los cambios serán irreversibles. (S/N)");
-								
-								confirmacionBorrado = Character.toUpperCase(sc.nextLine().charAt(0));
+								try {
+									confirmacionBorrado = Character.toUpperCase(sc.nextLine().charAt(0));
+								}
+								catch (Exception e) {confirmacionBorrado = 'A';}
 							}
 							while (confirmacionBorrado != 'S' && confirmacionBorrado != 'N');
 							
@@ -376,8 +394,10 @@ public class GestoraPrincipal {
 									do {
 										System.out.println("Estás seguro de copiar la partida "+espacioGuardado+"\n"
 												+ "encima de la partida "+espacioSobreescrito+"? el cambio será irreversible. (S/N)");
-										
-										confirmacionSobreescritura = Character.toUpperCase(sc.nextLine().charAt(0));
+										try {
+											confirmacionSobreescritura = Character.toUpperCase(sc.nextLine().charAt(0));
+										}
+										catch (Exception e) {confirmacionSobreescritura = 'A';}
 									}
 									while (confirmacionSobreescritura != 'S' && confirmacionSobreescritura != 'N');
 									
@@ -453,8 +473,10 @@ public class GestoraPrincipal {
 											
 											pintarConfirmacionTienda(jugadorActual, opcionTienda);
 											
-											confirmacionTienda = Character.toUpperCase(sc.nextLine().charAt(0));
-											
+											try {
+												confirmacionTienda = Character.toUpperCase(sc.nextLine().charAt(0));
+											}
+											catch (Exception e) {confirmacionTienda = 'A';}
 										}
 										while (confirmacionTienda != 'S' && confirmacionTienda != 'N');
 										
@@ -647,7 +669,7 @@ public class GestoraPrincipal {
 															}
 															else { 
 																
-																recompensaOro = mazmorras[opcionMazmorra].getEventos()[siguienteEvento+1].calcularRecompensa(i);
+																recompensaOro = mazmorras[opcionMazmorra].getEventos()[siguienteEvento+1].calcularRecompensa(i+1);
 																
 																if (jugadorActual.getClase() == Clase.COMERCIANTE) recompensaOro = (int) (recompensaOro*1.5);
 																System.out.println("Has ganado "+recompensaOro+" de oro");
@@ -751,17 +773,15 @@ public class GestoraPrincipal {
 																}
 																
 																System.out.println("Has ganado "+recompensaOro+" de oro");
-																
 																try {
 																	jugadorActual.modificarOro(recompensaOro);
 																} catch (ExcepcionJugador e) {}
-																try {
-																	jugadorActual.setMazmorrasCompletadas(opcionMazmorra+1);
-																} catch (ExcepcionJugador e) {}
-																if (opcionMazmorra != 9 && opcionMazmorra < jugadorActual.getMazmorrasCompletadas()) {
-																	System.out.println("Mazmorra " +(opcionMazmorra+1)+  " desbloqueada.");
-																	
 																
+																if (opcionMazmorra != 9 && opcionMazmorra == jugadorActual.getMazmorrasCompletadas()) {
+																	try {
+																		jugadorActual.setMazmorrasCompletadas(opcionMazmorra+1);
+																	} catch (ExcepcionJugador e) {}
+																	System.out.println("Mazmorra " +(opcionMazmorra+1)+  " desbloqueada.");
 																}
 																else if (opcionMazmorra == 9){
 																	//Pintar creditos
@@ -769,7 +789,9 @@ public class GestoraPrincipal {
 																}
 																
 																System.out.println("Pulsa intro para continuar.");
+																
 																sc.nextLine();
+																
 															}
 
 														}

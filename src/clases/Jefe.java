@@ -211,7 +211,7 @@ public class Jefe extends Evento implements Comparable<Jefe>{
 		int recompensa;
 		Random rm = new Random();
 		
-		recompensa = (int) (this.getDestreza()+rm.nextInt(this.getDestreza()*nivel)/25);
+		recompensa = (int) (this.getDestreza()+rm.nextInt(this.getDestreza()*nivel)/50);
 		
 		return recompensa;
 		
