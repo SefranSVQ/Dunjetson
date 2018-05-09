@@ -7,8 +7,7 @@ package clases;
  * 
  * 		Atributos propios: ninguno.
  * 
- * 		Metodos añadidos:
- * 			- calcularVictoria
+ * 		criterio de comparacion / igualdad: dificultadBase
  */
 
 public class Trampa extends Evento implements Comparable<Trampa>{

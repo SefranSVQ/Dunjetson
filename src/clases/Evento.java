@@ -21,6 +21,19 @@
  * 
  */
 
+/*
+ * Getters y setters
+ * 
+ * String getNombre()
+ * void setNombre(String Nombre)
+ * 
+ * int getDificultadBase()
+ * void setDificultadBase (int dificultadBase)
+ * 
+ * int getDificultadBase()
+ * 
+ */
+
 
 package clases;
 

@@ -17,6 +17,24 @@
  * 
  */
 
+/*
+ * Getters y Setters
+ * 
+ * int getID()
+ * 
+ * String getNombre()
+ * void setNombre(String nombre)
+ * 
+ * int getTotalNiveles()
+ * void setTotalNiveles(int totalNiveles)
+ * 
+ * Evento[] getEventos()
+ * void setEventos(Evento[] eventos)
+ * 
+ * int getContadorID()
+ * 
+ */
+
 package clases;
 
 import excepciones.ExcepcionMazmorra;

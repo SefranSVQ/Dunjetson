@@ -96,7 +96,7 @@ public class GestoraFichero {
 	/*
 	 * pintarPartidasGuardadas
 	 * 
-	 * Este método pintará por pantallas las partidas 
+	 * Este método pintará por pantalla las partidas 
 	 * guardadas en el fichero save.txt.
 	 * 
 	 * Entradas: nada
@@ -191,16 +191,18 @@ public class GestoraFichero {
 		Jugador jug = null;
 		String cadena = " ";
 		String[] parametros = new String[7];
+		boolean leido = false;
 		
 		try {
 			br = new BufferedReader(new FileReader(save));
 		} catch (FileNotFoundException e1) {}
 		
-		for (int i = 0 ; i < 5; i++) {
+		for (int i = 0 ; i < 5 && leido == false; i++) {
 			
 			if (i == posicion) {
 				try {
 					cadena = br.readLine();
+					leido = true;
 				} catch (IOException e) {}
 			}
 			else {

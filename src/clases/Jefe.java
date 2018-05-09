@@ -29,6 +29,24 @@ import java.util.Random;
  * 			
  */
 
+/*
+ * Getters y setters
+ * 
+ * int getFuerza()
+ * void setFuerza(int fuerza)
+ * 
+ * int getInteligencia()
+ * void setInteligencia(int inteligencia)
+ * 
+ * int getAgilidad()
+ * void setAgilidad(int agilidad)
+ * 
+ * int getDestreza()
+ * 
+ * 
+ * 
+ */
+
 import excepciones.ExcepcionJefe;
 
 public class Jefe extends Evento implements Comparable<Jefe>{

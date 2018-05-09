@@ -72,7 +72,8 @@ public class GestoraPrincipal {
 			
 			/* 
 			 * Notas:
-			 * Los jefes siempre están en la posición 0 de eventos.
+			 * Los jefes siempre están en la posición 0 
+			 * 	del array de eventos.
 			 * 
 			 */
 		
@@ -1229,6 +1230,48 @@ public class GestoraPrincipal {
 	
 	private void pintarTitulo() {
 		
+   
+		UtilJuego.pararTiempo(150);  System.out.println("DDDDDDDDDDDDD                                                 jjjj ");
+		UtilJuego.pararTiempo(150);  System.out.println("D::::::::::::DDD                                             j::::j                            tttt   ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::::::::::::DD                                            jjjj                           ttt:::t   ");
+		UtilJuego.pararTiempo(150);  System.out.println("D::::::DDDDD:::::D                                                                          t:::::t   ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D    D:::::D   uuuuuu    uuuuuu	nnnn  nnnnnnnn       jjjjjjj	                     t:::::t ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u	n:::nn::::::::nn     j:::::j  eeeeeeeeeeee     ttttttt:::::ttttttt        ssssssssss      ooooooooooo     nnnn  nnnnnnnn    ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u	n::::::::::::::nn    j::::j ee::::::::::::ee   t:::::::::::::::::t      ss::::::::::s   oo:::::::::::oo   n:::nn::::::::nn  ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u	nn:::::::::::::::n   j::::je::::::eeeee:::::ee t:::::::::::::::::t    ss:::::::::::::s o:::::::::::::::o  n::::::::::::::n ");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u  	n:::::nnnn:::::n     j::::je::::::e     e:::::etttttt:::::::tttttt    s::::::ssss:::::so:::::ooooo:::::o  n::::::::::::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u  	n::::n    n::::n     j::::je:::::::eeeee::::::e      t:::::t           s:::::s  ssssss o::::o     o::::o  n:::::nnnn:::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D     D:::::D  u::::u    u::::u  	n::::n    n::::n     j::::je:::::::::::::::::e       t:::::t             s::::::s      o::::o     o::::o  n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::D    D:::::D   u:::::uuuu:::::u  	n::::n    n::::n     j::::je::::::eeeeeeeeeee        t:::::t                s::::::s   o::::o     o::::o  n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::DDDDD:::::D    u:::::::::::::::uu	n::::n    n::::n     j::::je:::::::e                 t:::::t    ttttttssssss   s:::::s o::::o     o::::o  n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D:::::::::::::::DD    u:::::::::::::::u	n::::n    n::::n     j::::je::::::::e                t::::::tttt:::::ts:::::ssss::::::so:::::ooooo:::::o  n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("D::::::::::::DDD      uu::::::::uu:::u	n::::n    n::::n     j::::j e::::::::eeeeeeee        tt::::::::::::::ts::::::::::::::s o:::::::::::::::o  n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("DDDDDDDDDDDDD          uuuuuuuu  uuuu	nnnnnn    nnnnnn     j::::j  ee:::::::::::::e          tt:::::::::::tt s:::::::::::ss   oo:::::::::::oo   n::::n    n::::n");
+		UtilJuego.pararTiempo(150);  System.out.println("                                                             j::::j    eeeeeeeeeeeee             ttttttttttt    sssssssssss       ooooooooooo     nnnnnn    nnnnnn");
+		UtilJuego.pararTiempo(150);  System.out.println("                                                   jjjj      j::::j");
+		UtilJuego.pararTiempo(150);  System.out.println("                                                  j::::jj   j:::::j");	
+		UtilJuego.pararTiempo(150);  System.out.println("                                                  j::::::jjj::::::j");	
+		UtilJuego.pararTiempo(150);  System.out.println("                                                  jj::::::::::::j ");
+		UtilJuego.pararTiempo(150);  System.out.println("                                                    jjj::::::jjj  ");
+		UtilJuego.pararTiempo(150);  System.out.println("                                                       jjjjjj     ");
+                        
+                        
+                                         
+                                         
+                                         
+                                           
+
+
+
+
+
+
+
+
+
+                        
+
+		/*
 		System.out.println(" ");
 		System.out.println("||====     ||    ||  |\\\\    ||  =======||  ||=======  ========   ========     =====     |\\\\    ||"); UtilJuego.pararTiempo(333); 
 		System.out.println("||    \\\\   ||    ||  ||\\\\   ||         ||  ||            ||      //         //     \\\\   ||\\\\   ||"); UtilJuego.pararTiempo(333); 
@@ -1236,7 +1279,7 @@ public class GestoraPrincipal {
 		System.out.println("||     ||  ||    ||  ||  \\\\ ||         ||  ||===         ||     \\\\=====\\\\  ||       ||  ||  \\\\ ||"); UtilJuego.pararTiempo(333); 
 		System.out.println("||    //   \\\\    //  ||   \\\\||  \\\\    //   ||            ||            //   \\\\     //   ||   \\\\||"); UtilJuego.pararTiempo(333); 
 		System.out.println("||====       ====    ||    \\\\|   =====     ||=======     ||     ======//      =====     ||    \\\\|"); UtilJuego.pararTiempo(333); 
-		
+		*/
 		System.out.println("\n\n                             Pulsa \"Intro\" para jugar");
 		
 	}
